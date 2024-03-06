@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="8"
+    tools:context=".ComplainRaiseActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="@drawable/btn_outline"
+        android:layout_margin="@dimen/_20sdp"
+        android:gravity="center">
+
+        <ImageButton
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/camera_plaseholder_24"
+            android:layout_gravity="center"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:orientation="vertical"
+        android:layout_weight="3.2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/complain_select_spinner_btn"
+                android:layout_width="@dimen/_140sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_outline"
+                android:gravity="center"
+                android:hint="Select Your Issue"
+                android:padding="10dp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:textColor="@color/primary_color"
+                android:textColorHint="@color/primary_color"
+                android:textSize="14.5sp"
+                app:spinner_arrow_gravity="end"
+                android:layout_margin="@dimen/_5sdp"
+                app:spinner_arrow_padding="8dp"
+                app:spinner_divider_color="@color/primary_color"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="0.4dp"
+                app:spinner_item_array="@array/complain_of_type"
+                app:spinner_item_height="46dp"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="@color/white"
+                app:spinner_popup_elevation="14dp" />
+            <ImageButton
+                android:id="@+id/complain_select_image_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/baseline_arrow_drop_down_24"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextIssueTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:hint="Complain title"
+            android:background="@drawable/edit_text_background"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editTextIssueDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextIssueTitle"
+            android:layout_marginTop="16dp"
+            android:hint="Complain  Description"
+            android:background="@drawable/edit_text_background"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:padding="@dimen/_5sdp"
+            android:lines="7" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/FastPay_btn_wallet"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:text="Submit "
+        android:layout_margin="@dimen/_5sdp"
+        android:backgroundTint="@color/primary_color"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:textStyle="italic|bold"
+        android:textSize="@dimen/_20sdp"/>
+
+</LinearLayout>
