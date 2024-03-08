@@ -1,14 +1,12 @@
-package com.nothing.societyuser;
+package com.nothing.societyuser
+
 import TransactionHistoryAdapter
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,8 +14,6 @@ import com.nothing.societyuser.Model.TransactionHistoryModel
 import com.nothing.societyuser.databasehandler.Member
 import com.nothing.societyuser.databasehandler.Transaction
 import com.nothing.societyuser.databinding.ActivityTransactionHistoryBinding
-import kotlinx.coroutines.delay
-import java.util.Date
 
 class TransactionHistory : AppCompatActivity() {
 
@@ -37,8 +33,6 @@ class TransactionHistory : AppCompatActivity() {
 //            binding.transactionHistoryRv.visibility = View.VISIBLE
 //            binding.paddingRv.visibility = View.GONE
 //        }
-
-
 
 
         // Create a dummy list of transactions for testing
@@ -63,24 +57,32 @@ class TransactionHistory : AppCompatActivity() {
         Log.d("Transaction History", Firebase.auth.currentUser?.uid ?: "NO UID FOUND")
         for (transaction in transactions) {
             Log.d("Transaction History", transaction.date.toString())
-            dummyList.add(TransactionHistoryModel(transaction.date, transaction.amount.toInt(), transaction.completed))
+            dummyList.add(
+                TransactionHistoryModel(
+                    transaction.date,
+                    transaction.amount.toInt(),
+                    transaction.completed,
+                    transaction.id
+                )
+            )
         }
 
         val fireStore = Firebase.firestore
         val user = Firebase.auth.currentUser
         val transaction = ArrayList<Transaction>()
 
-        fireStore.collection("member").document(user?.uid ?: "C5r6cqwiemodtmaudeAm").collection("transactions").get()
+        fireStore.collection("member").document(user?.uid ?: "C5r6cqwiemodtmaudeAm")
+            .collection("transactions").get()
             .addOnSuccessListener { result ->
 //                this.transactions = document.toObject(Member::class.java)?.transactions ?: ArrayList()
                 for (document in result) {
                     Log.d("Doc", document.id)
                     transactions.add(
                         Transaction(
-                        document.data["id"].toString(),
-                        document.data["amount"].toString().toInt(),
-                        document.data["completed"].toString().toBoolean()
-                    )
+                            document.data["id"].toString(),
+                            document.data["amount"].toString().toInt(),
+                            document.data["completed"].toString().toBoolean()
+                        )
                     )
                 }
                 Log.d("Member", "Transactions: $transactions")
@@ -88,7 +90,14 @@ class TransactionHistory : AppCompatActivity() {
 
                 for (transaction in transactions) {
                     Log.d("Transaction History", transaction.date.toString())
-                    dummyList.add(TransactionHistoryModel(transaction.date, transaction.amount.toInt(), transaction.completed))
+                    dummyList.add(
+                        TransactionHistoryModel(
+                            transaction.date,
+                            transaction.amount.toInt(),
+                            transaction.completed,
+                            transaction.id
+                        )
+                    )
                 }
             }
         return dummyList
@@ -98,10 +107,6 @@ class TransactionHistory : AppCompatActivity() {
 //        dummyList.add(TransactionHistoryModel(Date(), 1500, false))
 //        dummyList.add(TransactionHistoryModel(Date(), 800, true))
         // Add more dummy transactions as needed
-
-
-
-
     }
 
     // Example of simulating data update after some delay
@@ -112,7 +117,7 @@ class TransactionHistory : AppCompatActivity() {
         handler.postDelayed({
             // Update the adapter with the new data
             updateAdapterWithData(newData)
-        }, 2000) // Simulating a 2-second delay, replace with your actual logic
+        }, 5000) // Simulating a 2-second delay, replace with your actual logic
     }
 
     // Example of updating data in the adapter
