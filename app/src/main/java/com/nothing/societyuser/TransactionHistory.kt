@@ -11,6 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nothing.societyuser.Model.TransactionHistoryModel
+import com.nothing.societyuser.Model.createComplainHistory
 import com.nothing.societyuser.Model.createTransactionHistoryModel
 import com.nothing.societyuser.Model.payTransaction
 import com.nothing.societyuser.databasehandler.Member
@@ -27,6 +28,14 @@ class TransactionHistory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        createComplainHistory(
+            123,
+            "ss",
+            "title",
+            Date(234234),
+            "address",
+            "phone"
+            )
 
 //        binding.transactionPaddingBtn.setOnClickListener(){
 //            binding.transactionHistoryRv.visibility = View.GONE
