@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.nothing.societyuser.databinding.ActivityWalletBinding
-import com.nothing.societyuser.easyWork.EaseWorkActivity
-import java.lang.Integer.parseInt
 
 class WalletActivity : AppCompatActivity() {
 
@@ -33,7 +31,8 @@ class WalletActivity : AppCompatActivity() {
 
         //TODO: Intent for history button
         binding.historyBtnWallet.setOnClickListener(){
-            intentFun(PaymentHistory::class.java)
+            var intent = Intent(this, TransactionHistory::class.java)
+            startActivity(intent)
 
         }
 

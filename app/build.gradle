@@ -59,4 +59,5 @@ dependencies {
     //spinnet btn
     implementation "com.github.skydoves:powerspinner:1.2.7"
     implementation 'com.github.dangiashish:Auto-Image-Slider:1.0.4'
+    implementation 'com.github.ZEGOCLOUD:zego_uikit_prebuilt_video_conference_android:2.3.1'
 }
