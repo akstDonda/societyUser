@@ -12,6 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nothing.societyuser.Model.TransactionHistoryModel
 import com.nothing.societyuser.Model.createTransactionHistoryModel
+import com.nothing.societyuser.Model.payTransaction
 import com.nothing.societyuser.databasehandler.Member
 import com.nothing.societyuser.databasehandler.Transaction
 import com.nothing.societyuser.databinding.ActivityTransactionHistoryBinding
@@ -82,7 +83,7 @@ class TransactionHistory : AppCompatActivity() {
 
                     dummyList.add(
                         createTransactionHistoryModel(
-                            Date(document.get("date").toString()),
+                            Date(1321325),
                             document.get("amount").toString().toInt(),
                             document.get("completed").toString().toBoolean(),
                             document.get("id").toString()
@@ -91,6 +92,8 @@ class TransactionHistory : AppCompatActivity() {
                 }
                 Log.d("Member", "Transactions: $dummyList")
                 Log.d("Member", "UID: ${user?.uid ?: "C5r6cqwiemodtmaudeAm"}")
+
+                payTransaction(dummyList.get(0), this)
 
 //                for (transaction in transactions) {
 //                    Log.d("Transaction History", transaction.date.toString())
@@ -105,12 +108,6 @@ class TransactionHistory : AppCompatActivity() {
 //                }
             }
         return dummyList
-
-        // Adding dummy transactions
-//        dummyList.add(TransactionHistoryModel(Date(), 1000, true))
-//        dummyList.add(TransactionHistoryModel(Date(), 1500, false))
-//        dummyList.add(TransactionHistoryModel(Date(), 800, true))
-        // Add more dummy transactions as needed
     }
 
     // Example of simulating data update after some delay
@@ -122,6 +119,7 @@ class TransactionHistory : AppCompatActivity() {
             // Update the adapter with the new data
             updateAdapterWithData(newData)
         }, 5000) // Simulating a 2-second delay, replace with your actual logic
+
     }
 
     // Example of updating data in the adapter
