@@ -11,9 +11,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nothing.societyuser.Model.TransactionHistoryModel
+import com.nothing.societyuser.Model.createTransactionHistoryModel
 import com.nothing.societyuser.databasehandler.Member
 import com.nothing.societyuser.databasehandler.Transaction
 import com.nothing.societyuser.databinding.ActivityTransactionHistoryBinding
+import java.util.Date
 
 class TransactionHistory : AppCompatActivity() {
 
@@ -51,21 +53,21 @@ class TransactionHistory : AppCompatActivity() {
     private fun createDummyTransactions(): List<TransactionHistoryModel> {
         val dummyList = ArrayList<TransactionHistoryModel>()
 
-        var member = Member()
+//        var member = Member()
 
-        var transactions = member.transactions
-        Log.d("Transaction History", Firebase.auth.currentUser?.uid ?: "NO UID FOUND")
-        for (transaction in transactions) {
-            Log.d("Transaction History", transaction.date.toString())
-            dummyList.add(
-                TransactionHistoryModel(
-                    transaction.date,
-                    transaction.amount.toInt(),
-                    transaction.completed,
-                    transaction.id
-                )
-            )
-        }
+//        var transactions = member.transactions
+//        Log.d("Transaction History", Firebase.auth.currentUser?.uid ?: "NO UID FOUND")
+//        for (transaction in transactions) {
+//            Log.d("Transaction History", transaction.date.toString())
+//            dummyList.add(
+//                TransactionHistoryModel(
+//                    transaction.date,
+//                    transaction.amount.toInt(),
+//                    transaction.completed,
+//                    transaction.id
+//                )
+//            )
+//        }
 
         val fireStore = Firebase.firestore
         val user = Firebase.auth.currentUser
@@ -77,28 +79,30 @@ class TransactionHistory : AppCompatActivity() {
 //                this.transactions = document.toObject(Member::class.java)?.transactions ?: ArrayList()
                 for (document in result) {
                     Log.d("Doc", document.id)
-                    transactions.add(
-                        Transaction(
-                            document.data["id"].toString(),
-                            document.data["amount"].toString().toInt(),
-                            document.data["completed"].toString().toBoolean()
+
+                    dummyList.add(
+                        createTransactionHistoryModel(
+                            Date(document.get("date").toString()),
+                            document.get("amount").toString().toInt(),
+                            document.get("completed").toString().toBoolean(),
+                            document.get("id").toString()
                         )
                     )
                 }
-                Log.d("Member", "Transactions: $transactions")
+                Log.d("Member", "Transactions: $dummyList")
                 Log.d("Member", "UID: ${user?.uid ?: "C5r6cqwiemodtmaudeAm"}")
 
-                for (transaction in transactions) {
-                    Log.d("Transaction History", transaction.date.toString())
-                    dummyList.add(
-                        TransactionHistoryModel(
-                            transaction.date,
-                            transaction.amount.toInt(),
-                            transaction.completed,
-                            transaction.id
-                        )
-                    )
-                }
+//                for (transaction in transactions) {
+//                    Log.d("Transaction History", transaction.date.toString())
+//                    dummyList.add(
+//                        TransactionHistoryModel(
+//                            transaction.date,
+//                            transaction.amount.toInt(),
+//                            transaction.completed,
+//                            transaction.id
+//                        )
+//                    )
+//                }
             }
         return dummyList
 
