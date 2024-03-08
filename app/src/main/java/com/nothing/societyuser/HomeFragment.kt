@@ -74,6 +74,9 @@ class HomeFragment : Fragment() {
                         intentFun(ComplainRaiseActivity::class.java)
 
                     }
+                    4->{
+                        intentFun(WalletActivity::class.java)
+                    }
 
                     else -> {
                         // Handle other positions if necessary

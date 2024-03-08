@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -27,6 +28,18 @@ class TransactionHistory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        binding.transactionPaddingBtn.setOnClickListener(){
+//            binding.transactionHistoryRv.visibility = View.GONE
+//            binding.paddingRv.visibility = View.VISIBLE
+//        }
+//        binding.transactionCompleteBtn.setOnClickListener(){
+//            binding.transactionHistoryRv.visibility = View.VISIBLE
+//            binding.paddingRv.visibility = View.GONE
+//        }
+
+
+
 
         // Create a dummy list of transactions for testing
         val dummyTransactionList = createDummyTransactions()
@@ -78,6 +91,7 @@ class TransactionHistory : AppCompatActivity() {
                     dummyList.add(TransactionHistoryModel(transaction.date, transaction.amount.toInt(), transaction.completed))
                 }
             }
+        return dummyList
 
         // Adding dummy transactions
 //        dummyList.add(TransactionHistoryModel(Date(), 1000, true))
@@ -85,7 +99,9 @@ class TransactionHistory : AppCompatActivity() {
 //        dummyList.add(TransactionHistoryModel(Date(), 800, true))
         // Add more dummy transactions as needed
 
-        return dummyList
+
+
+
     }
 
     // Example of simulating data update after some delay
@@ -103,4 +119,8 @@ class TransactionHistory : AppCompatActivity() {
     private fun updateAdapterWithData(newData: List<TransactionHistoryModel>) {
         transactionAdapter.updateData(newData)
     }
+
+    //padding and complete transaction show
+
+
 }

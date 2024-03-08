@@ -26,11 +26,11 @@
             android:id="@+id/share_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/videoconference_icon_top_share"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
             android:layout_marginHorizontal="20dp"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/videoconference_icon_top_share" />
     </RelativeLayout>
 
     <LinearLayout
