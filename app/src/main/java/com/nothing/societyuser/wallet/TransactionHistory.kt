@@ -95,7 +95,7 @@ class TransactionHistory : AppCompatActivity() {
                             Date(7275227257),
                             document.get("amount").toString().toInt(),
                             document.get("completed").toString().toBoolean(),
-                            document.get("id").toString()
+                            document.id
                         )
                     )
                 }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.nothing.societyuser.Model.payTransaction
 import com.nothing.societyuser.databinding.ActivityPayAdminBinding
 
 class PayAdmin : AppCompatActivity() {
@@ -68,6 +69,9 @@ class PayAdmin : AppCompatActivity() {
                                     ).show()
                                     handleCurrentAmount(currentAmount) // Handle the currentAmount value
                                     transactionProcessed = true // Set the flag to true after processing the transaction
+
+                                    val transactionId: String? = intent.getStringExtra("transactionId")
+                                    payTransaction(transactionId!!, this)
                                 }
                                 .addOnFailureListener { e ->
                                     Toast.makeText(

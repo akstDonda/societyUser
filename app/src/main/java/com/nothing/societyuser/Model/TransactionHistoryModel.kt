@@ -19,8 +19,8 @@ public fun createTransactionHistoryModel(date: Date, amount: Int, status: Boolea
     return TransactionHistoryModel(date, amount, status, id)
 }
 
-public fun payTransaction(transactionHistoryModel: TransactionHistoryModel, intent: Context) {
-    var newTransactionHistoryModel = transactionHistoryModel.copy(status = true)
+public fun payTransaction(transactionId: String, intent: Context) {
+//    var newTransactionHistoryModel = transactionHistoryModel.copy(status = true)
 
     // upload transaction to firebase
 
@@ -28,8 +28,8 @@ public fun payTransaction(transactionHistoryModel: TransactionHistoryModel, inte
     val user = Firebase.auth.currentUser
 
     fireStore.collection("member").document(user?.uid ?: "C5r6cqwiemodtmaudeAm")
-        .collection("transactions").document(newTransactionHistoryModel.id).set(
-            newTransactionHistoryModel
+        .collection("transactions").document(transactionId).update(
+            "completed", true
         )
         .addOnSuccessListener {
             Toast.makeText(intent, "Transaction Success", Toast.LENGTH_SHORT).show()

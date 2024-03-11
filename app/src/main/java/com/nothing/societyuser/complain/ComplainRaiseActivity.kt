@@ -2,12 +2,11 @@ package com.nothing.societyuser.complain
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.ktx.Firebase
@@ -32,27 +31,38 @@ class ComplainRaiseActivity : AppCompatActivity() {
                 binding.complainImageLl.visibility = View.GONE
                 binding.complainInfoLl.visibility = View.GONE
                 binding.submitComplainBtn.visibility = View.GONE
-                binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(this, R.color.light_white))
+                binding.complainRootLl.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.light_white
+                    )
+                )
                 binding.spinKit.visibility = View.VISIBLE
                 val fileUri = data?.data!!
 
-                Firebase.storage.reference.child("complainImage/${UUID.randomUUID()}").putFile(fileUri).addOnCompleteListener(){
-                    if(it.isSuccessful){
+                Firebase.storage.reference.child("complainImage/${UUID.randomUUID()}")
+                    .putFile(fileUri).addOnCompleteListener {
+                        if (it.isSuccessful) {
 
-                        it.result.storage.downloadUrl.addOnCompleteListener {
-                            complainModel.imageUrl=it.toString()
-                            binding.complainImageLl.visibility = View.VISIBLE
-                            binding.complainInfoLl.visibility = View.VISIBLE
-                            binding.submitComplainBtn.visibility = View.VISIBLE
-                            binding.spinKit.visibility = View.GONE
-                            binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
-                            binding.complainImage.setImageURI(fileUri)
+                            it.result.storage.downloadUrl.addOnCompleteListener {
+                                complainModel.imageUrl = it.toString()
+                                binding.complainImageLl.visibility = View.VISIBLE
+                                binding.complainInfoLl.visibility = View.VISIBLE
+                                binding.submitComplainBtn.visibility = View.VISIBLE
+                                binding.spinKit.visibility = View.GONE
+                                binding.complainRootLl.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        this,
+                                        R.color.white
+                                    )
+                                )
+                                binding.complainImage.setImageURI(fileUri)
+
+                            }
+
 
                         }
-
-
                     }
-                }
 
 
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
@@ -61,6 +71,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
                 Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityComplainRaiseBinding.inflate(layoutInflater)
@@ -86,7 +97,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
         }
 
         //submit complain
-        binding.submitComplainBtn.setOnClickListener(){
+        binding.submitComplainBtn.setOnClickListener {
             binding.complainSelectSpinnerBtn.setOnSpinnerItemSelectedListener<String> { _, _, _, item ->
                 selectedComplaintType = item
             }
@@ -95,36 +106,35 @@ class ComplainRaiseActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please select Complain Type.🌀", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (binding.editTextComplainTitle.text.toString().isEmpty()){
-                binding.editTextComplainTitle.error= "Title is required ❔"
-            }else if (binding.editTextIssueDescription.text.toString().isEmpty()){
-                binding.editTextIssueDescription.error= "Description is required ❔"
-            }else if(complainModel.imageUrl.isNullOrEmpty()){
+            if (binding.editTextComplainTitle.text.toString().isEmpty()) {
+                binding.editTextComplainTitle.error = "Title is required ❔"
+            } else if (binding.editTextIssueDescription.text.toString().isEmpty()) {
+                binding.editTextIssueDescription.error = "Description is required ❔"
+            } else if (complainModel.imageUrl.isNullOrEmpty()) {
                 Toast.makeText(this, "Please select Complain Image.", Toast.LENGTH_SHORT).show()
-            }
-            else{
+            } else {
                 toastFun("Submit")
                 complainModel.type = selectedComplaintType ?: "Default value or handle null case"
                 complainModel.title = binding.editTextComplainTitle.text.toString()
                 complainModel.description = binding.editTextIssueDescription.text.toString()
 
-
+                complainModel.upload(this)
             }
 
         }
 
     }
+
     //intent
-    fun intentFun(destination : Class<*>){
+    fun intentFun(destination: Class<*>) {
         var intent = Intent(this, destination)
         startActivity(intent)
     }
+
     //toast
-    fun toastFun(message : String) {
+    fun toastFun(message: String) {
         var toast = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
-
 
 
 }

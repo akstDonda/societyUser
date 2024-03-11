@@ -3,9 +3,13 @@ package com.nothing.societyuser.welcome
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import com.nothing.societyuser.databinding.ActivityRegistrationBinding
 import com.nothing.societyuser.fragment.BottomActivity
 
@@ -17,6 +21,27 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // TODO: use societies
+        var societies: HashMap<String, String> = HashMap<String, String>()
+        val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
+
+        db.collection("societies")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val societyName = document.data["name"].toString()
+                    val id = document.id
+
+                    societies[id] = societyName
+                }
+
+                Log.d("", societies.toString())
+            }
+            .addOnFailureListener { exception ->
+                Log.e("error", "Failed to fetch societies")
+            }
 
         //Intent Back Button
         binding.registraionBackBtn.setOnClickListener(){

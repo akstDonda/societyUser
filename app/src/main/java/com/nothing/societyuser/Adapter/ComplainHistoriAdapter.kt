@@ -11,7 +11,7 @@ import com.nothing.societyuser.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ComplainHistoryAdapter(private val complainList: List<complainHistoryModel>) :
+class ComplainHistoryAdapter(private var complainList: List<complainHistoryModel>) :
     RecyclerView.Adapter<ComplainHistoryAdapter.ComplainHistoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplainHistoryViewHolder {
@@ -46,5 +46,10 @@ class ComplainHistoryAdapter(private val complainList: List<complainHistoryModel
         val date: TextView = itemView.findViewById(R.id.complain_history_date)
         val status: TextView = itemView.findViewById(R.id.complain_history_status)
         val description: TextView = itemView.findViewById(R.id.complain_history_desc)
+    }
+
+    fun updateData(complainList: List<complainHistoryModel>) {
+        this.complainList = complainList
+        notifyDataSetChanged()
     }
 }
