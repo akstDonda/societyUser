@@ -1,4 +1,4 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.welcome
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.os.Handler
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.nothing.societyuser.R
+import com.nothing.societyuser.fragment.BottomActivity
 
 class SplashActivity : AppCompatActivity() {
 

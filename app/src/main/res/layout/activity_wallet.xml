@@ -7,7 +7,7 @@
     android:weightSum="14"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".WalletActivity">
+    tools:context=".wallet.WalletActivity">
 
 
     <View
@@ -62,6 +62,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/current_amount_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_20sdp"
@@ -181,9 +182,7 @@
             android:background="@drawable/edit_text_background"
             android:drawableStart="@drawable/plain_dollar"
             android:hint="Enter Amount"
-            android:inputType="number"
-            android:padding="@dimen/_12sdp"
-            tools:ignore="HardcodedText"/>
+            android:padding="@dimen/_12sdp" />
 
         <LinearLayout
             android:id="@+id/ll"

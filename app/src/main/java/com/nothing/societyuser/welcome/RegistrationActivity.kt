@@ -1,6 +1,5 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.welcome
 
-import android.app.VoiceInteractor
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.nothing.societyuser.databinding.ActivityRegistrationBinding
-import com.nothing.societyuser.easyWork.EaseWorkActivity
+import com.nothing.societyuser.fragment.BottomActivity
 
 class RegistrationActivity : AppCompatActivity() {
 

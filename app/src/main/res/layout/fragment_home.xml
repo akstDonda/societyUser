@@ -107,6 +107,7 @@
             android:layout_weight="0.5"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/box1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:backgroundTint="@color/Primary_color"
@@ -198,6 +199,7 @@
 
         <!--        second product-->
         <androidx.cardview.widget.CardView
+            android:id="@+id/box2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:backgroundTint="@color/Primary_color"

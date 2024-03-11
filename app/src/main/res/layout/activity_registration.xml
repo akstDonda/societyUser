@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:weightSum="8"
     android:orientation="vertical"
-    tools:context=".RegistrationActivity">
+    tools:context=".welcome.RegistrationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

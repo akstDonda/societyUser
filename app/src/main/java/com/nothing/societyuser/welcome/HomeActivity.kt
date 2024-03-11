@@ -1,4 +1,4 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.welcome
 
 import HomeCategoryAdapter
 import android.content.Intent
@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nothing.societyuser.Model.HomeCategoryModel
+import com.nothing.societyuser.R
 import com.nothing.societyuser.databinding.ActivityHomeBinding
+import com.nothing.societyuser.wallet.WalletActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -32,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
         adapter.onItemClickListener = object : HomeCategoryAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 when (position) {
-                    0 -> intentFun(demo::class.java)
+                    0 -> intentFun(WalletActivity::class.java)
                     1 -> intentFun(SplashActivity::class.java)
                     // Add more cases as needed for other positions
                     else -> {

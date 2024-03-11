@@ -1,13 +1,10 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.complain
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.PopupWindow
 import android.widget.Toast
 import com.nothing.societyuser.databinding.ActivityComplainRaiseBinding
-import com.nothing.societyuser.databinding.ActivityWalletBinding
-import com.skydoves.powerspinner.PowerSpinnerView
 
 class ComplainRaiseActivity : AppCompatActivity() {
 

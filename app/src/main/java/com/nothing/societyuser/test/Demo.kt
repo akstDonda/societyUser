@@ -1,19 +1,15 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.test
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import com.nothing.societyuser.R
 
-class demo : AppCompatActivity() {
+class Demo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_demo)
-        var btn= findViewById<Button>(R.id.button)
-        btn.setOnClickListener {
-            Toast.makeText(this,"hellp",Toast.LENGTH_LONG).show()
 
-        }
     }
 }

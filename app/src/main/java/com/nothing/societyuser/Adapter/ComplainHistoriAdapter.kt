@@ -17,6 +17,7 @@ class ComplainHistoryAdapter(private val complainList: List<complainHistoryModel
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplainHistoryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.single_item_complain_history, parent, false)
+
         return ComplainHistoryViewHolder(view)
     }
 

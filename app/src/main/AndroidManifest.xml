@@ -13,7 +13,19 @@
         android:theme="@style/Theme.SocietyUser"
         tools:targetApi="31">
         <activity
-            android:name=".ComplainRaiseHistory"
+            android:name=".welcome.MoreCategotyActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".dialog_forgot_password"
+            android:exported="false" />
+        <activity
+            android:name=".welcome.SettingActivity"
+            android:exported="false"
+            android:parentActivityName=".fragment.BottomActivity"/>
+        <activity
+            android:name=".complain.ComplainRaiseHistory"
             android:exported="false" />
         <activity
             android:name=".meeting.MeetingConsforanceActivity"
@@ -22,56 +34,59 @@
             android:name=".meeting.MeetingMain"
             android:exported="false" />
         <activity
-            android:name=".demo"
+            android:name=".test.demo"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".welcome.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.SocietyUser" />
         <activity
-            android:name=".BottomActivity"
+            android:name=".fragment.BottomActivity"
             android:exported="false" />
         <activity
-            android:name=".ComplainRaiseActivity"
+            android:name=".complain.ComplainRaiseActivity"
             android:exported="false" />
         <activity
-            android:name=".DabitCardActivity"
+            android:name=".wallet.DabitCardActivity"
             android:exported="false" />
         <activity
-            android:name=".PayAdmin"
+            android:name=".wallet.PayAdmin"
             android:exported="false" />
         <activity
             android:name=".easyWork.EaseWorkActivity"
             android:exported="false" />
         <activity
-            android:name=".WalletActivity"
+            android:name=".wallet.WalletActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".welcome.RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".welcome.LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize">
+
+        </activity>
         <activity
-            android:name=".WelcomeSignUpLogin"
+            android:name=".welcome.WelcomeSignUpLogin"
             android:exported="false" />
         <activity
-            android:name=".TransactionHistory"
+            android:name=".wallet.TransactionHistory"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".welcome.SplashActivity"
             android:exported="true"
             android:label="@string/title_activity_splash"
             android:theme="@style/Theme.SocietyUser">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".test.MainActivity"
             android:exported="true" />
 
         <meta-data

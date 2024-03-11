@@ -1,11 +1,11 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.complain
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.nothing.societyuser.Adapter.ComplainHistoryAdapter
 import com.nothing.societyuser.Model.complainHistoryModel
+import com.nothing.societyuser.R
 import com.nothing.societyuser.databinding.ActivityComplainRaiseHistoryBinding
 import java.util.*
 

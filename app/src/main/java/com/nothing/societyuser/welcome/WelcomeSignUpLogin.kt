@@ -1,4 +1,4 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.welcome
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -2,19 +2,17 @@ package com.nothing.societyuser
 
 import HomeCategoryAdapter
 import android.content.Intent
-import android.nfc.Tag
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nothing.societyuser.Model.HomeCategoryModel
-import com.nothing.societyuser.meeting.MeetingMain
+import com.nothing.societyuser.complain.ComplainRaiseActivity
+import com.nothing.societyuser.wallet.WalletActivity
+import com.nothing.societyuser.welcome.HomeActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,7 +61,7 @@ class HomeFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 when (position) {
                     0 -> {
-                        intentFun(demo::class.java)
+                        intentFun(WalletActivity::class.java)
                     }
                     1 ->{
                         // Replace the current fragment with XYZFragment

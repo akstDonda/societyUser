@@ -2,8 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SocietyUser" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/white</item>
+        <!-- Set status bar color -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
-    <style name="Theme.SocietyUser" parent="Base.Theme.SocietyUser" />
+    <style name="Theme.SocietyUser" parent="Base.Theme.SocietyUser">
+        <!-- Customize specific theme attributes if needed -->
+    </style>
 </resources>

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:weightSum="8"
-    tools:context=".PayAdmin">
+    tools:context=".wallet.PayAdmin">
 
     <TextView
         android:id="@+id/textView3"
@@ -41,7 +41,7 @@
 
 
         <EditText
-            android:id="@+id/editTextTextAmount"
+            android:id="@+id/pay_admin_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
@@ -54,7 +54,7 @@
             android:padding="@dimen/_12sdp"
             tools:ignore="HardcodedText"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_btn_wallet"
+            android:id="@+id/pay_admin_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"

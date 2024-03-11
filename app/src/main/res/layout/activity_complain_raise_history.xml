@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ComplainRaiseHistory">
+    tools:context=".complain.ComplainRaiseHistory">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/complain_raise_history_rv"

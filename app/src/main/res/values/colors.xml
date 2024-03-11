@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary_color">#1E232C</color>
     <color name="editText_bg">#D0BEC0C3</color>
+    <color name="light_white">#808080</color>
     <color name="policy">#0073B0</color>
 </resources>

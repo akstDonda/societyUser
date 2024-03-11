@@ -1,12 +1,11 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.fragment
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.nothing.societyuser.R
 import com.nothing.societyuser.databinding.ActivityBottomBinding
 
 class BottomActivity : AppCompatActivity() {

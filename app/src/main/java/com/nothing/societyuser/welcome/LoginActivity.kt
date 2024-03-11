@@ -1,14 +1,19 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.welcome
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.nothing.societyuser.R
 import com.nothing.societyuser.databinding.ActivityLoginBinding
-import com.nothing.societyuser.easyWork.EaseWorkActivity
+import com.nothing.societyuser.fragment.BottomActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,6 +36,11 @@ class LoginActivity : AppCompatActivity() {
         //Text Intent to registation
         binding.registationTextBtn.setOnClickListener {
             intentFun(RegistrationActivity::class.java)
+        }
+        //forgot password
+        binding.btnTxtForgot.setOnClickListener(){
+            forgotPass()
+
         }
 
 
@@ -115,5 +125,43 @@ class LoginActivity : AppCompatActivity() {
         var toast = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
     }
+
+    fun forgotPass() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        val dialogView: View = layoutInflater.inflate(R.layout.activity_dialog_forgot_password, null)
+        val editText: EditText = dialogView.findViewById(R.id.emailBox)
+        builder.setView(dialogView)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
+        dialogView.findViewById<Button>(R.id.btnReset).setOnClickListener {
+            val userEmail: String = editText.text.toString()
+
+            if (TextUtils.isEmpty(userEmail) || !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+                Toast.makeText(this@LoginActivity, "Enter a valid email address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val auth = FirebaseAuth.getInstance()
+            auth.sendPasswordResetEmail(userEmail).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(this@LoginActivity, "Check your email", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this@LoginActivity, "Unable to send, please try again", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Cancel
+        dialogView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        if (dialog.window != null) {
+            dialog.window!!.setBackgroundDrawableResource(R.color.light_white)
+        }
+    }
+
 
 }

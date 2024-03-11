@@ -33,7 +33,15 @@
                 android:layout_height="wrap_content"
                 android:text="Status : true"
                 android:textSize="@dimen/_25ssp"/>
+            <Button
+                android:id="@+id/transaction_to_pay_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary_color"
+                android:text="Fast Pay"
+                android:textStyle="bold"/>
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

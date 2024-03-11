@@ -1,4 +1,4 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.wallet
 
 import TransactionHistoryAdapter
 import android.os.Bundle
@@ -13,8 +13,6 @@ import com.google.firebase.ktx.Firebase
 import com.nothing.societyuser.Model.TransactionHistoryModel
 import com.nothing.societyuser.Model.createComplainHistory
 import com.nothing.societyuser.Model.createTransactionHistoryModel
-import com.nothing.societyuser.Model.payTransaction
-import com.nothing.societyuser.databasehandler.Member
 import com.nothing.societyuser.databasehandler.Transaction
 import com.nothing.societyuser.databinding.ActivityTransactionHistoryBinding
 import java.util.Date
@@ -28,14 +26,15 @@ class TransactionHistory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        createComplainHistory(
-            123,
-            "ss",
-            "title",
-            Date(234234),
-            "address",
-            "phone"
-            )
+        //TODO:tell jym
+//        createComplainHistory(
+//            123,
+//            "ss",
+//            "title",
+//            Date(234234),
+//            "address",
+//            "phone"
+//            )
 
 //        binding.transactionPaddingBtn.setOnClickListener(){
 //            binding.transactionHistoryRv.visibility = View.GONE
@@ -54,6 +53,7 @@ class TransactionHistory : AppCompatActivity() {
         transactionAdapter = TransactionHistoryAdapter(dummyTransactionList)
         binding.transactionHistoryRv.adapter = transactionAdapter
         binding.transactionHistoryRv.layoutManager = LinearLayoutManager(this)
+
 
         // Simulate updating data after some delay (e.g., after a network request)
         // Replace this with your actual data update logic
@@ -92,7 +92,7 @@ class TransactionHistory : AppCompatActivity() {
 
                     dummyList.add(
                         createTransactionHistoryModel(
-                            Date(1321325),
+                            Date(7275227257),
                             document.get("amount").toString().toInt(),
                             document.get("completed").toString().toBoolean(),
                             document.get("id").toString()
@@ -102,7 +102,7 @@ class TransactionHistory : AppCompatActivity() {
                 Log.d("Member", "Transactions: $dummyList")
                 Log.d("Member", "UID: ${user?.uid ?: "C5r6cqwiemodtmaudeAm"}")
 
-                payTransaction(dummyList.get(0), this)
+//                payTransaction(dummyList.get(0), this)
 
 //                for (transaction in transactions) {
 //                    Log.d("Transaction History", transaction.date.toString())
@@ -117,6 +117,12 @@ class TransactionHistory : AppCompatActivity() {
 //                }
             }
         return dummyList
+
+        // Adding dummy transactions
+//        dummyList.add(TransactionHistoryModel(Date(), 1000, true))
+//        dummyList.add(TransactionHistoryModel(Date(), 1500, false))
+//        dummyList.add(TransactionHistoryModel(Date(), 800, true))
+        // Add more dummy transactions as needed
     }
 
     // Example of simulating data update after some delay
@@ -127,7 +133,7 @@ class TransactionHistory : AppCompatActivity() {
         handler.postDelayed({
             // Update the adapter with the new data
             updateAdapterWithData(newData)
-        }, 5000) // Simulating a 2-second delay, replace with your actual logic
+        }, 2000) // Simulating a 2-second delay, replace with your actual logic
 
     }
 
