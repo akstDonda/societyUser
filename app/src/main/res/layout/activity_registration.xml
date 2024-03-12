@@ -118,17 +118,16 @@
             android:inputType="textPassword"
             tools:ignore="HardcodedText" />
 
-        <EditText
-            android:id="@+id/registation_society_name_edt"
+        <AutoCompleteTextView
+            android:id="@+id/registation_society_name_auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_background"
-            android:hint="Select Society Name"
+            android:hint="search Society Name"
             android:padding="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:inputType="textPassword"
             tools:ignore="HardcodedText" />
         <EditText
             android:id="@+id/registation_House_No_edt"
@@ -140,7 +139,6 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:inputType="textPassword"
             tools:ignore="HardcodedText" />
 
         <Button

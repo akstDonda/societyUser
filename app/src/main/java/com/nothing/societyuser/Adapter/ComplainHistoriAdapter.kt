@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nothing.societyuser.Model.complainHistoryModel
 import com.nothing.societyuser.R
+import com.nothing.societyuser.complain.ComplainRaiseHistory
+import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,6 +35,7 @@ class ComplainHistoryAdapter(private var complainList: List<complainHistoryModel
 
         holder.status.text = "Status: ${complain.status}"
         holder.description.text = "Description: ${complain.description}"
+
     }
 
     override fun getItemCount(): Int {

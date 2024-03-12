@@ -51,6 +51,7 @@ class ComplainRaiseHistory : AppCompatActivity() {
                                 // TODO: get Image using URL, ref https://firebase.google.com/docs/storage/android/download-files
 
                                 val url = data["imageUrl"]
+
                                 var status = "Pending"
                                 if (data["resolved"] == "true")
                                     status = "Resolved!"
