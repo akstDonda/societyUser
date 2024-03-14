@@ -17,9 +17,7 @@
             android:exported="true">
 
         </activity>
-        <activity
-            android:name=".dialog_forgot_password"
-            android:exported="false" />
+
         <activity
             android:name=".welcome.SettingActivity"
             android:exported="false"
@@ -33,9 +31,7 @@
         <activity
             android:name=".meeting.MeetingMain"
             android:exported="false" />
-        <activity
-            android:name=".test.demo"
-            android:exported="false" />
+
         <activity
             android:name=".welcome.HomeActivity"
             android:exported="true"

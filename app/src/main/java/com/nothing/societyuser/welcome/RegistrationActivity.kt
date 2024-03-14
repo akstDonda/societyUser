@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.nothing.societyuser.databinding.ActivityRegistrationBinding
 import com.nothing.societyuser.fragment.BottomActivity
@@ -78,7 +79,7 @@ class RegistrationActivity : AppCompatActivity() {
         //Intent Registation Button
         binding.registraionBtn.setOnClickListener(){
 
-            createAccounnt()
+            createAccount()
             //TODO:change home activity
             //TODO: data send To firebase
 
@@ -105,44 +106,65 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     //create Account
-    fun createAccounnt(){
-        var userName = binding.registationUserNameEdt.text.toString()
-        var userEmail = binding.registationEmailEdt.text.toString()
-        var userPassword = binding.registationPasswordEdt.text.toString()
-        var userConfirmPassword = binding.registationRePasswordEdt.text.toString()
+    private fun createAccount() {
+        val userName = binding.registationUserNameEdt.text.toString()
+        val userEmail = binding.registationEmailEdt.text.toString()
+        val userPassword = binding.registationPasswordEdt.text.toString()
+        val userConfirmPassword = binding.registationRePasswordEdt.text.toString()
+        val userHouseNo = binding.registationHouseNoEdt.text.toString()
 
-        //TODO: userSociety name edt change to auto search edit textBox
-        var userSocietyName = "surat"    //binding.registationSocietyNameEdt.text.toString()
-        var userHouseNo = binding.registationHouseNoEdt.text.toString()
+        val isValidated: Boolean = validateRegistration(
+            userName,
+            userEmail,
+            userPassword,
+            userConfirmPassword,
+            societyId,
+            userHouseNo
+        )
 
-        var isValidated:Boolean = validateRegistration(userName,userEmail,userPassword,userConfirmPassword,userSocietyName,userHouseNo)
         if (!isValidated) {
             return
         }
-        toastFun(societyId.toString())
-        createAccounntInFirebase(userName, userEmail, userPassword, societyId, userHouseNo)
-    }
 
-    private fun createAccounntInFirebase(
-        userName: String,
-        userEmail: String,
-        userPassword: String,
-        userSocietyName: String,
-        userHouseNo: String
-    ) {
         changeProgress(true)
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(){
-            changeProgress(false)
-            if (it.isSuccessful){
-                toastFun("Welcome")
-                intentFun(BottomActivity::class.java)
-                firebaseAuth.currentUser?.sendEmailVerification()
-            }else{
-                toastFun(""+it.exception!!.localizedMessage)
-            }
 
-        }
+        val firebaseAuth = FirebaseAuth.getInstance()
+        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+            .addOnCompleteListener { task ->
+                changeProgress(false)
+
+                if (task.isSuccessful) {
+                    val user = firebaseAuth.currentUser
+
+                    if (user != null) {
+                        // User registration successful, now add data to "member" collection
+                        val db = FirebaseFirestore.getInstance()
+                        val memberData = hashMapOf(
+                            "userName" to userName,
+                            "userEmail" to userEmail,
+                            "societyId" to societyId,
+                            "userHouseNo" to userHouseNo
+                            // Add more fields as needed
+                        )
+
+                        db.collection("member")
+                            .document(user.uid)
+                            .set(memberData)
+                            .addOnSuccessListener {
+                                toastFun("Welcome")
+                                intentFun(BottomActivity::class.java)
+                                user.sendEmailVerification()
+                            }
+                            .addOnFailureListener { e ->
+                                toastFun("Error adding data to member collection: ${e.message}")
+                            }
+                    } else {
+                        toastFun("User is null.")
+                    }
+                } else {
+                    toastFun("${task.exception?.localizedMessage}")
+                }
+            }
     }
 
     //progressBar on button
