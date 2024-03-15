@@ -20,6 +20,12 @@
         android:theme="@style/Theme.SocietyUser"
         tools:targetApi="31">
         <activity
+            android:name=".setting.updateUserProfile"
+            android:exported="false" />
+        <activity
+            android:name=".setting.UserProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".setting.informationAcctivity"
             android:exported="false" />
         <activity

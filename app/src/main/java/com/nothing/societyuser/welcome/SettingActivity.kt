@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.nothing.societyuser.databinding.ActivitySettingBinding
 
+
 class SettingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingBinding

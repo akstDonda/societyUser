@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.nothing.societyuser.databinding.FragmentSettingBinding
 import com.nothing.societyuser.setting.ChangePasswordActivity
+import com.nothing.societyuser.setting.UserProfileActivity
 import com.nothing.societyuser.setting.informationAcctivity
 import com.nothing.societyuser.welcome.LoginActivity
 
@@ -49,6 +50,11 @@ class SettingFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.llProfileAccount.setOnClickListener(){
+            val intent = Intent(requireActivity(), UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         //logOut
         binding.logOutBtn.setOnClickListener() {
             val firebaseAuth = FirebaseAuth.getInstance()
@@ -58,6 +64,7 @@ class SettingFragment : Fragment() {
             startActivity(intent)
             requireActivity().finish()
         }
+
 
 
     }

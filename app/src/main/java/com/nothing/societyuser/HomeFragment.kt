@@ -63,6 +63,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        UserDataFetch()
         dataInitialize()
         val layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         recyclerView = view.findViewById(R.id.category_rv)
@@ -185,7 +186,33 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    //toast
+    fun UserDataFetch() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+        if (uid != null) {
+            db.collection("member").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        // Access the fields you need
+                        val userName = document.getString("userName")
+
+                        // Update the UI on the main thread
+                        activity?.runOnUiThread {
+                            if (userName != null && binding != null) {
+                                var finalUserName:String = "Hello, "+userName
+                                binding!!.helloUserNameTxtHome.text = finalUserName
+                            }
+                        }
+                    } else {
+                        println("No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    println("Error getting documents: $exception")
+                }
+        }
+    }
+
 
 
     private fun startHomeActivity() {

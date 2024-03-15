@@ -216,5 +216,6 @@ class RegistrationActivity : AppCompatActivity() {
     private fun intentFun(destination: Class<*>) {
         val intent = Intent(this, destination)
         startActivity(intent)
+        finish()
     }
 }
