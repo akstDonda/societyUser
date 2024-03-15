@@ -51,6 +51,8 @@ class ChangePasswordActivity : AppCompatActivity() {
                                 user!!.updatePassword(newPassword)
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
+                                            //TODO:SET dialogBox
+                                            //TODO: change UI
                                             Toast.makeText(this, "Password changed successfully", Toast.LENGTH_SHORT).show()
                                             auth.signOut()
                                             startActivity(Intent(this, LoginActivity::class.java))
