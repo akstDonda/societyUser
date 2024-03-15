@@ -8,7 +8,7 @@ import com.google.firebase.firestore.firestore
 import java.util.Date
 
 data class complainHistoryModel(
-    var img:Int,
+    var imgUrl: String,
     var type:String,
     var title:String,
     var date:Date,
@@ -16,7 +16,7 @@ data class complainHistoryModel(
     var description:String,
 )
 
-public fun createComplainHistory(img:Int,type:String,title:String,date:Date,status:String,description:String, intent: Context){
+public fun createComplainHistory(img:String,type:String,title:String,date:Date,status:String,description:String, intent: Context){
     val complainHistoryModel = complainHistoryModel(img,type,title,date,status,description)
 
     val fireStore = Firebase.firestore

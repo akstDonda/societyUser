@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,15 +15,15 @@
         android:theme="@style/Theme.SocietyUser"
         tools:targetApi="31">
         <activity
+            android:name=".setting.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".welcome.MoreCategotyActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".welcome.SettingActivity"
             android:exported="false"
-            android:parentActivityName=".fragment.BottomActivity"/>
+            android:parentActivityName=".fragment.BottomActivity" />
         <activity
             android:name=".complain.ComplainRaiseHistory"
             android:exported="false" />
@@ -31,7 +33,6 @@
         <activity
             android:name=".meeting.MeetingMain"
             android:exported="false" />
-
         <activity
             android:name=".welcome.HomeActivity"
             android:exported="true"
@@ -61,9 +62,7 @@
         <activity
             android:name=".welcome.LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".welcome.WelcomeSignUpLogin"
             android:exported="false" />

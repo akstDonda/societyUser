@@ -182,6 +182,7 @@
 <!--        //change password-->
 
         <LinearLayout
+            android:id="@+id/ll_changePassword"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="horizontal"

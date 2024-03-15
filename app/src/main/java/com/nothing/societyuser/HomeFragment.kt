@@ -1,16 +1,27 @@
 package com.nothing.societyuser
 
 import HomeCategoryAdapter
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView.ScaleType
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.codebyashish.autoimageslider.AutoImageSlider
+import com.codebyashish.autoimageslider.Enums.ImageScaleType
+import com.codebyashish.autoimageslider.Models.ImageSlidesModel
+import com.google.android.material.slider.Slider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.Model.HomeCategoryModel
 import com.nothing.societyuser.complain.ComplainRaiseActivity
+import com.nothing.societyuser.databinding.FragmentHomeBinding
 import com.nothing.societyuser.wallet.WalletActivity
 import com.nothing.societyuser.welcome.HomeActivity
 
@@ -29,22 +40,24 @@ class HomeFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private var binding: FragmentHomeBinding? = null
     private lateinit var recyclerView:RecyclerView
     private lateinit var adapter: HomeCategoryAdapter
     private lateinit var categoryList: ArrayList<HomeCategoryModel>
+    private var societyId:String = ""
+    private lateinit var slider:ArrayList<ImageSlidesModel>
+    var database  = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding?.root
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+//        return inflater.inflate(R.layout.fragment_home, container, false)
+
 
     }
 
@@ -56,6 +69,9 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
         adapter= HomeCategoryAdapter(categoryList)
+        //slider call
+        fireslider()
+
 
         adapter.onItemClickListener = object : HomeCategoryAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
@@ -84,6 +100,73 @@ class HomeFragment : Fragment() {
         }
 
         recyclerView.adapter=adapter
+
+    }
+
+    private fun fireslider(){
+
+
+        // create an imageArrayList which extend ImageSlideModel class
+        val autoImageList : ArrayList<ImageSlidesModel> = ArrayList()
+
+        // find and initialize ImageSlider
+
+
+        // add some imagees or titles (text) inside the imagesArrayList
+        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/237/200/300", "First image"))
+        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/238/200/300", ""))
+        autoImageList.add(ImageSlidesModel("https://picsum.photos/id/239/200/300", "Third image"))
+
+        // set the added images inside the AutoImageSlider
+        binding?.autoImageSlider?.setImageList(autoImageList, ImageScaleType.FIT)
+
+        // set any default animation or custom animation (setSlideAnimation(ImageAnimationTypes.ZOOM_IN))
+        binding?.autoImageSlider?.setDefaultAnimation()
+    }
+
+//    private fun fireslider() {
+//        // Initialize slider ArrayList
+//        slider = ArrayList()
+//
+//        // Call socId() with a callback to ensure it's finished before querying Firestore
+//        socId { societyId ->
+//            if (societyId.isNotEmpty()) {
+//                Toast.makeText(requireContext(), societyId.toString(), Toast.LENGTH_SHORT).show()
+//                database.collection("societies").document(societyId).collection("imageSlider").get()
+//                    .addOnCompleteListener { task ->
+//                        if (task.isSuccessful) {
+//                            for (document in task.result!!) {
+//                                // Ensure slider ArrayList is initialized before adding items
+//                                slider.add(document.getString("url")!!)
+//                            }
+//                            // Set image list only once after adding all items
+//                            binding?.autoImageSlider?.setImageList(slider)
+//                        } else {
+//                            Toast.makeText(requireContext(), "can't load image", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                    .addOnFailureListener { exception ->
+//                        // Handle failure
+//                    }
+//            }
+//        }
+//    }
+
+
+    private fun socId(callback: (String) -> Unit) {
+        val user = FirebaseAuth.getInstance().currentUser
+        val uid = user?.uid
+        val db = FirebaseFirestore.getInstance()
+        db.collection("member")
+            .document(uid!!)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                val societyId = documentSnapshot.getString("societyId") ?: ""
+                callback(societyId)
+            }
+            .addOnFailureListener { exception ->
+                // Handle failure
+            }
     }
 
     private fun dataInitialize() {
