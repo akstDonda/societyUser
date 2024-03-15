@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.R
@@ -39,6 +40,7 @@ class UserProfileActivity : AppCompatActivity() {
                         val userEmail = document.getString("userEmail")
                         val userHouseNo = document.getString("userHouseNo")
                         val userName = document.getString("userName")
+                        val userImage = document.getString("userImage")
 
                         // Update the UI on the main thread
                         runOnUiThread {
@@ -78,6 +80,12 @@ class UserProfileActivity : AppCompatActivity() {
                                 binding.profileUserNameTxt.text = userName
                                 binding.profileEmailTxt.text = userEmail
                                 binding.profileHouseNoTxt.text = userHouseNo
+
+                                Glide.with(this)
+                                    .load(userImage)
+                                    .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
+                                    .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+                                    .into(binding.imageUserShow)
                             }
                         }
                     } else {

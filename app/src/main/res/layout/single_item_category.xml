@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/_5sdp"
     android:layout_marginEnd="@dimen/_5sdp"
-    android:layout_marginTop="@dimen/_4sdp"
+    android:layout_marginTop="@dimen/_8sdp"
     android:orientation="vertical">
 
         <ImageView
@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAlignment="center"
+            android:gravity="center_horizontal"
             android:fontFamily="@font/roboto_bold"
             android:textSize="@dimen/_12sdp"
             android:text="Pay"/>

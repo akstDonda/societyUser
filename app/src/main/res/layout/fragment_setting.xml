@@ -38,6 +38,7 @@
                     app:cardCornerRadius="@dimen/_50sdp">
 
                     <ImageView
+                        android:id="@+id/user_profile_image_setting"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
                         android:background="@color/primary_color"
@@ -55,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
                         <TextView
+                            android:id="@+id/user_profile_txt_setting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Madara Uchiha"

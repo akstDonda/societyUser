@@ -13,6 +13,7 @@ import android.widget.ImageView.ScaleType
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.codebyashish.autoimageslider.AutoImageSlider
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
@@ -22,8 +23,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.Model.HomeCategoryModel
 import com.nothing.societyuser.complain.ComplainRaiseActivity
 import com.nothing.societyuser.databinding.FragmentHomeBinding
+import com.nothing.societyuser.wallet.TransactionHistory
 import com.nothing.societyuser.wallet.WalletActivity
 import com.nothing.societyuser.welcome.HomeActivity
+import com.nothing.societyuser.welcome.MoreCategotyActivity
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -73,6 +76,14 @@ class HomeFragment : Fragment() {
         //slider call
         fireslider()
 
+        //pay
+        binding!!.payBtnHomeBig.setOnClickListener(){
+            intentFun(TransactionHistory::class.java)
+        }
+        binding!!.claimBtnHomeBig.setOnClickListener(){
+            intentFun(ComplainRaiseActivity::class.java)
+        }
+
 
         adapter.onItemClickListener = object : HomeCategoryAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
@@ -91,6 +102,10 @@ class HomeFragment : Fragment() {
                     }
                     4->{
                         intentFun(WalletActivity::class.java)
+                    }
+                    5->{
+
+                        intentFun(MoreCategotyActivity::class.java)
                     }
 
                     else -> {
@@ -124,6 +139,8 @@ class HomeFragment : Fragment() {
         // set any default animation or custom animation (setSlideAnimation(ImageAnimationTypes.ZOOM_IN))
         binding?.autoImageSlider?.setDefaultAnimation()
     }
+
+
 
 //    private fun fireslider() {
 //        // Initialize slider ArrayList
@@ -195,12 +212,20 @@ class HomeFragment : Fragment() {
                     if (document != null) {
                         // Access the fields you need
                         val userName = document.getString("userName")
+                        val userImage = document.getString("userImage")
 
                         // Update the UI on the main thread
                         activity?.runOnUiThread {
                             if (userName != null && binding != null) {
                                 var finalUserName:String = "Hello, "+userName
                                 binding!!.helloUserNameTxtHome.text = finalUserName
+                                Glide.with(this)
+                                    .load(userImage)
+                                    .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
+                                    .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+                                    .centerCrop()
+                                    .into(binding!!.userImageHomefragment)
+
                             }
                         }
                     } else {

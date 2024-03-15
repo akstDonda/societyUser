@@ -28,13 +28,15 @@
                 android:layout_height="@dimen/_50sdp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_50sdp">
+                app:cardCornerRadius="@dimen/_25sdp">
 
                 <ImageButton
+                    android:id="@+id/user_image_homefragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/primary_color"
                     android:contentDescription="User Profile"
+                    android:background="@drawable/rounded_background"
                     tools:ignore="HardcodedText" />
             </androidx.cardview.widget.CardView>
 
@@ -117,6 +119,7 @@
             android:layout_weight="2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pay_btn_home_big"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/home_box_gradient">
@@ -209,6 +212,7 @@
             android:layout_weight="2">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/claim_btn_home_big"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/home_box_gradient">

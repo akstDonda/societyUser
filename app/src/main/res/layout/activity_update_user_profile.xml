@@ -7,8 +7,10 @@
     android:layout_gravity="center_vertical"
     android:orientation="vertical"
     android:backgroundTint="@color/white"
+    android:id="@+id/update_user_profile_root"
     tools:context=".setting.UserProfileActivity">
     <ScrollView
+        android:id="@+id/update_user_profile_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical">
@@ -88,12 +90,17 @@
 
 
         </LinearLayout>
-
-
-
-
-
     </ScrollView>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/primary_color"
+        app:SpinKit_Style="FadingCircle" />
 
 
 

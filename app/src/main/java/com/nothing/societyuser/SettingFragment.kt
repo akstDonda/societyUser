@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.databinding.FragmentSettingBinding
 import com.nothing.societyuser.setting.ChangePasswordActivity
 import com.nothing.societyuser.setting.UserProfileActivity
@@ -29,6 +31,8 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        UserDataFetch()
 
         // Your initialization logic goes here
         binding.llChangePassword.setOnClickListener(){
@@ -68,6 +72,44 @@ class SettingFragment : Fragment() {
 
 
     }
+
+    //data fetch to firebase
+    fun UserDataFetch() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+        if (uid != null) {
+            db.collection("member").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        // Access the fields you need
+                        val userName = document.getString("userName")
+                        val userImage = document.getString("userImage")
+
+                        // Update the UI on the main thread
+                        activity?.runOnUiThread {
+                            if (userName != null && binding != null) {
+                                var finalUserName:String = "Hello, "+userName
+                                binding!!.userProfileTxtSetting.text = finalUserName
+                                Glide.with(this)
+                                    .load(userImage)
+                                    .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
+                                    .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+                                    .centerCrop()
+                                    .into(binding!!.userProfileImageSetting)
+
+                            }
+                        }
+                    } else {
+                        println("No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    println("Error getting documents: $exception")
+                }
+        }
+    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
