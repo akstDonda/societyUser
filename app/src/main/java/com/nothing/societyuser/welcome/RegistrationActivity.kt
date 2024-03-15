@@ -1,19 +1,15 @@
 package com.nothing.societyuser.welcome
 
-import android.R
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
-import com.google.firebase.Firebase
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
 import com.nothing.societyuser.databinding.ActivityRegistrationBinding
 import com.nothing.societyuser.fragment.BottomActivity
 
@@ -22,18 +18,15 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistrationBinding
     private lateinit var societyNameAutoComplete: AutoCompleteTextView
     private lateinit var societyAdapter: ArrayAdapter<String>
-    private lateinit var  societyId:String
-
+    private var societyId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: use societies
-        var societies: HashMap<String, String> = HashMap<String, String>()
-        val db = Firebase.firestore
-        val user = Firebase.auth.currentUser
+        val societies: HashMap<String, String> = HashMap()
+        val db = FirebaseFirestore.getInstance()
 
         db.collection("societies")
             .get()
@@ -46,19 +39,35 @@ class RegistrationActivity : AppCompatActivity() {
                 }
 
                 Log.d("", societies.toString())
+                initAutoCompleteTextView(societies)
             }
             .addOnFailureListener { exception ->
-                Log.e("error", "Failed to fetch societies")
+                Log.e("error", "Failed to fetch societies", exception)
             }
 
-        //autotextview
+        //Intent Back Button
+        binding.registraionBackBtn.setOnClickListener {
+            intentFun(WelcomeSignUpLogin::class.java)
+        }
 
+        //Intent Registation Button
+        binding.registraionBtn.setOnClickListener {
+            createAccount()
+        }
+
+        //Text Intent to Login
+        binding.loginTextBtn.setOnClickListener {
+            intentFun(LoginActivity::class.java)
+        }
+    }
+
+    // Initialize AutoCompleteTextView
+    private fun initAutoCompleteTextView(societies: HashMap<String, String>) {
         societyNameAutoComplete = binding.registationSocietyNameAuto
-        societyAdapter = AutoTextSocName(
+        societyAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_dropdown_item_1line,
-            societies.values.toMutableList(),
-            societies
+            societies.values.toMutableList()
         )
         societyNameAutoComplete.setAdapter(societyAdapter)
 
@@ -66,46 +75,10 @@ class RegistrationActivity : AppCompatActivity() {
             val societyName = societyAdapter.getItem(position) ?: ""
             societyId = societies.entries.find { it.value == societyName }?.key ?: ""
             Toast.makeText(this, "Selected Society: $societyId", Toast.LENGTH_SHORT).show()
-
         }
-
-
-
-        //Intent Back Button
-        binding.registraionBackBtn.setOnClickListener(){
-            intentFun(WelcomeSignUpLogin::class.java)
-        }
-
-        //Intent Registation Button
-        binding.registraionBtn.setOnClickListener(){
-
-            createAccount()
-            //TODO:change home activity
-            //TODO: data send To firebase
-
-        }
-
-        //Text Intent to Login
-        binding.loginTextBtn.setOnClickListener(){
-
-
-            intentFun(LoginActivity::class.java)
-
-        }
-
     }
 
-    //intent
-    fun intentFun(destination : Class<*>){
-        var intent = Intent(this, destination)
-        startActivity(intent)
-    }
-    //toast
-    fun toastFun(message : String) {
-        var toast = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-
-    //create Account
+    // Create account
     private fun createAccount() {
         val userName = binding.registationUserNameEdt.text.toString()
         val userEmail = binding.registationEmailEdt.text.toString()
@@ -113,16 +86,19 @@ class RegistrationActivity : AppCompatActivity() {
         val userConfirmPassword = binding.registationRePasswordEdt.text.toString()
         val userHouseNo = binding.registationHouseNoEdt.text.toString()
 
-        val isValidated: Boolean = validateRegistration(
-            userName,
-            userEmail,
-            userPassword,
-            userConfirmPassword,
-            societyId,
-            userHouseNo
-        )
-
-        if (!isValidated) {
+        if (!validateRegistration(
+                userName,
+                userEmail,
+                userPassword,
+                userConfirmPassword,
+                societyId,
+                userHouseNo
+            )
+        ) {
+            return
+        }
+        if(societyId.isEmpty() || societyId.isNullOrEmpty() || societyId.isEmpty()){
+            toastFun("Please Select Society Not only Search")
             return
         }
 
@@ -144,7 +120,6 @@ class RegistrationActivity : AppCompatActivity() {
                             "userEmail" to userEmail,
                             "societyId" to societyId,
                             "userHouseNo" to userHouseNo
-                            // Add more fields as needed
                         )
 
                         db.collection("member")
@@ -162,24 +137,24 @@ class RegistrationActivity : AppCompatActivity() {
                         toastFun("User is null.")
                     }
                 } else {
-                    toastFun("${task.exception?.localizedMessage}")
+                    toastFun("Error: ${task.exception?.localizedMessage}")
                 }
             }
     }
 
-    //progressBar on button
-     fun changeProgress(inProgress: Boolean) {
-         if (inProgress) {
-             binding.progressBar.visibility = View.VISIBLE
-             binding.registraionBtn.visibility = View.GONE
-         }else{
-             binding.progressBar.visibility = View.GONE
-             binding.registraionBtn.visibility = View.VISIBLE
-         }
+    // Show toast
+    private fun toastFun(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-//validation
-    fun validateRegistration(
+    // Change progress bar visibility
+    private fun changeProgress(inProgress: Boolean) {
+        binding.progressBar.visibility = if (inProgress) View.VISIBLE else View.GONE
+        binding.registraionBtn.visibility = if (inProgress) View.GONE else View.VISIBLE
+    }
+
+    // Validate registration fields
+    private fun validateRegistration(
         userName: String,
         userEmail: String,
         userPassword: String,
@@ -189,13 +164,11 @@ class RegistrationActivity : AppCompatActivity() {
     ): Boolean {
         // Check if any field is empty
         if (userName.isEmpty()) {
-            println()
             binding.registationUserNameEdt.error = "Username is required"
             return false
         }
 
         if (userEmail.isEmpty()) {
-
             binding.registationEmailEdt.error = "Email is required"
             return false
         }
@@ -210,13 +183,10 @@ class RegistrationActivity : AppCompatActivity() {
             return false
         }
 
-
-
         if (userHouseNo.isEmpty()) {
             binding.registationHouseNoEdt.error = "House Number is required"
             return false
         }
-
 
         // Validate email format
         val emailRegex = Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
@@ -236,10 +206,15 @@ class RegistrationActivity : AppCompatActivity() {
             binding.registationRePasswordEdt.error = "Passwords do not match"
             return false
         }
+
         // If all validations pass
-        println("Validation successful")
+        Log.d("RegistrationActivity", "Validation successful")
         return true
     }
 
-
+    // Start intent
+    private fun intentFun(destination: Class<*>) {
+        val intent = Intent(this, destination)
+        startActivity(intent)
+    }
 }
