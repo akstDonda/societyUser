@@ -29,7 +29,7 @@
             android:name=".setting.informationAcctivity"
             android:exported="false" />
         <activity
-            android:name=".cutomer_care"
+            android:name=".setting.cutomer_care"
             android:exported="false" />
         <activity
             android:name=".setting.ChangePasswordActivity"

@@ -1,4 +1,4 @@
-package com.nothing.societyuser
+package com.nothing.societyuser.setting
 
 import android.content.Intent
 import android.content.pm.PackageManager

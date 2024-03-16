@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.databinding.FragmentSettingBinding
 import com.nothing.societyuser.setting.ChangePasswordActivity
 import com.nothing.societyuser.setting.UserProfileActivity
+import com.nothing.societyuser.setting.cutomer_care
 import com.nothing.societyuser.setting.informationAcctivity
 import com.nothing.societyuser.welcome.LoginActivity
 

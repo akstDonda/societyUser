@@ -30,7 +30,7 @@ class MoreCategotyActivity : AppCompatActivity() {
         dummyDataList.add(HomeCategoryModel(R.drawable.wallet_icon, "wallet"))
         dummyDataList.add(HomeCategoryModel(R.drawable.history_icon, "Complain History"))
         dummyDataList.add(HomeCategoryModel(R.drawable.baseline_customer_care_24, "Customer Care"))
-        dummyDataList.add(HomeCategoryModel(R.drawable.outline_profule_24, "Account"))
+        dummyDataList.add(HomeCategoryModel(R.drawable.outline_profile_24, "Account"))
         dummyDataList.add(HomeCategoryModel(R.drawable.outline_info_24, "Information"))
         dummyDataList.add(HomeCategoryModel(R.drawable.baseline_edit_profile_24, "Edit Profile"))
         // Add more categories as needed
