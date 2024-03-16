@@ -1,59 +1,164 @@
 package com.nothing.societyuser
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.nothing.societyuser.Model.complainModel
+import com.nothing.societyuser.complain.ComplainRaiseHistory
+import com.nothing.societyuser.databinding.FragmentComplainBinding
+import java.util.UUID
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ComplainFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ComplainFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentComplainBinding? = null
+    private val binding get() = _binding!!
+    private var selectedComplaintType: String? = null
+    private val complainModel = complainModel()
+
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            if (resultCode == Activity.RESULT_OK) {
+                // Image Uri will not be null for RESULT_OK
+                val fileUri = data?.data ?: return@registerForActivityResult
+                uploadImage(fileUri)
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                Toast.makeText(requireContext(), "Error: ${ImagePicker.getError(data)}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_complain, container, false)
+    ): View {
+        _binding = FragmentComplainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ComplainFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ComplainFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Select image
+        binding.complainImage.setOnClickListener {
+            ImagePicker.with(requireActivity())
+                .crop()
+                .createIntent { intent ->
+                    startForProfileImageResult.launch(intent)
+                }
+        }
+
+        // Handle history button click
+        binding.complainHistoryBtn.setOnClickListener {
+            intentFun(ComplainRaiseHistory::class.java)
+        }
+
+        // Handle submit button click
+        binding.submitComplainBtn.setOnClickListener {
+            selectedComplaintType = binding.complainSelectSpinnerBtn.text.toString()
+
+            if (selectedComplaintType.isNullOrEmpty() || selectedComplaintType == "--select no of--") {
+                binding.complainSelectSpinnerBtn.error = "Please select Complain Type."
+                return@setOnClickListener
+            }
+
+            if (binding.editTextComplainTitle.text.isNullOrBlank()) {
+                binding.editTextComplainTitle.error = "Title is required."
+                return@setOnClickListener
+            }
+
+            if (binding.editTextIssueDescription.text.isNullOrBlank()) {
+                binding.editTextIssueDescription.error = "Description is required."
+                return@setOnClickListener
+            }
+
+            if (complainModel.imageUrl.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "Please select Complain Image.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            submitComplain()
+        }
+    }
+
+    private fun uploadImage(fileUri: Uri) {
+        binding.complainImageLl.visibility = View.GONE
+        binding.complainInfoLl.visibility = View.GONE
+        binding.submitComplainBtn.visibility = View.GONE
+        binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_white))
+        binding.spinKit.visibility = View.VISIBLE
+
+        Firebase.storage.reference.child("complainImage/${UUID.randomUUID()}")
+            .putFile(fileUri)
+            .addOnSuccessListener {
+                it.storage.downloadUrl.addOnSuccessListener { uri ->
+                    complainModel.imageUrl = uri.toString()
+                    displayUploadedImage(fileUri)
                 }
             }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "Error uploading image: ${it.message}", Toast.LENGTH_SHORT).show()
+                resetUI()
+            }
+    }
+
+    private fun displayUploadedImage(fileUri: Uri) {
+        binding.complainImageLl.visibility = View.VISIBLE
+        binding.complainInfoLl.visibility = View.VISIBLE
+        binding.submitComplainBtn.visibility = View.VISIBLE
+        binding.spinKit.visibility = View.GONE
+        binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+        binding.complainImage.setImageURI(fileUri)
+    }
+
+    private fun submitComplain() {
+        complainModel.type = selectedComplaintType ?: "Default value or handle null case"
+        complainModel.title = binding.editTextComplainTitle.text.toString()
+        complainModel.description = binding.editTextIssueDescription.text.toString()
+
+        complainModel.upload(requireContext())
+        toastFun("Complaint submitted successfully.")
+
+        binding.editTextComplainTitle.text.clear()
+        binding.editTextIssueDescription.text.clear()
+        binding.complainSelectSpinnerBtn.selectItemByIndex(0)
+    }
+
+    // Intent function
+    private fun intentFun(destination: Class<*>) {
+        val intent = Intent(requireContext(), destination)
+        startActivity(intent)
+    }
+
+    // Toast function
+    private fun toastFun(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun resetUI() {
+        binding.complainImageLl.visibility = View.VISIBLE
+        binding.complainInfoLl.visibility = View.VISIBLE
+        binding.submitComplainBtn.visibility = View.VISIBLE
+        binding.spinKit.visibility = View.GONE
+        binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
