@@ -19,6 +19,8 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var societyNameAutoComplete: AutoCompleteTextView
     private lateinit var societyAdapter: ArrayAdapter<String>
     private var societyId: String = ""
+    var societiesMembers: HashMap<String, List<String>> = HashMap()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,7 @@ class RegistrationActivity : AppCompatActivity() {
                     val id = document.id
 
                     societies[id] = societyName
+                    societiesMembers[id] = document.data["memberIDs"]!! as List<String>
                 }
 
                 Log.d("", societies.toString())
@@ -126,9 +129,15 @@ class RegistrationActivity : AppCompatActivity() {
                             .document(user.uid)
                             .set(memberData)
                             .addOnSuccessListener {
-                                toastFun("Welcome")
-                                intentFun(BottomActivity::class.java)
-                                user.sendEmailVerification()
+
+                                val new = societiesMembers[societyId]?.plus(user.uid)
+                                Log.d("SOME", new.toString());
+                                db.collection("societies").document(societyId).update("memberIDs", new)
+                                    .addOnSuccessListener {
+                                    toastFun("Welcome")
+                                    intentFun(BottomActivity::class.java)
+                                    user.sendEmailVerification()
+                                }
                             }
                             .addOnFailureListener { e ->
                                 toastFun("Error adding data to member collection: ${e.message}")
