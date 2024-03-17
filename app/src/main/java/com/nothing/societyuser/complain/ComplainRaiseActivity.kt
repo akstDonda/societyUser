@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.nothing.societyuser.Model.complainModel
@@ -21,6 +24,8 @@ class ComplainRaiseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityComplainRaiseBinding
     private var selectedComplaintType: String? = null
+
+    private var societyNameSend:String? = null
     private val complainModel = complainModel()
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -43,6 +48,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
         binding = ActivityComplainRaiseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        UserDataFetch()
         // Select image
         binding.complainImage.setOnClickListener {
             ImagePicker.with(this)
@@ -119,6 +125,8 @@ class ComplainRaiseActivity : AppCompatActivity() {
         complainModel.type = selectedComplaintType ?: "Default value or handle null case"
         complainModel.title = binding.editTextComplainTitle.text.toString()
         complainModel.description = binding.editTextIssueDescription.text.toString()
+        UserDataFetch()
+        complainModel.societyName = societyNameSend.toString()
 
         complainModel.upload(this)
         toastFun("Complaint submitted successfully.")
@@ -147,4 +155,50 @@ class ComplainRaiseActivity : AppCompatActivity() {
         binding.spinKit.visibility = View.GONE
         binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
     }
+
+
+
+        fun UserDataFetch() {
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
+            val db = FirebaseFirestore.getInstance()
+            if (uid != null) {
+                db.collection("member").document(uid).get()
+                    .addOnSuccessListener { document ->
+                        if (document != null) {
+                            // Access the fields you need
+                            var societyId = document.getString("societyId")!!
+
+                                    db.collection("societies").document(societyId).get()
+                                        .addOnSuccessListener { document ->
+                                            if (document != null) {
+                                                // Access the fields you need
+                                                val societyName = document.getString("name")
+                                                Toast.makeText(this, "Society Name: $societyName", Toast.LENGTH_SHORT).show()
+
+                                                // Update the UI on the main thread
+                                                runOnUiThread {
+                                                    if (societyName != null) {
+//                                                        binding.profileSocNameTxt.text = societyName
+                                                        societyNameSend = societyName
+                                                    }
+                                                }
+                                            } else {
+                                                println("No such document")
+                                            }
+                                        }
+                                        .addOnFailureListener { exception ->
+                                            println("Error getting documents: $exception")
+                                        }
+
+                                    //end
+
+                                }
+                            }
+                        } else {
+                            println("No such document")
+                        }
+                    }
+
+
+
 }

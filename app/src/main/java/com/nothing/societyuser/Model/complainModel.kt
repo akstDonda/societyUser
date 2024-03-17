@@ -12,16 +12,18 @@ class complainModel{
     var title:String = ""
     var description:String = ""
     var imageUrl:String = ""
+    var societyName =""
     var approved = false
     var rejected = false
     var resolved = false
     var timestamp: Timestamp = Timestamp.now()
 
-    constructor(type: String, title: String, description: String, imageUrl: String) {
+    constructor(type: String, title: String, description: String, imageUrl: String,societyName: String) {
         this.type = type
         this.title = title
         this.description = description
         this.imageUrl = imageUrl
+        this.societyName = societyName
     }
     constructor()
 
