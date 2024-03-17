@@ -9,6 +9,7 @@ import com.nothing.societyuser.Model.TransactionHistoryModel
 import com.nothing.societyuser.wallet.PayAdmin
 import com.nothing.societyuser.R
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class TransactionHistoryAdapter(private var transactionList: List<TransactionHistoryModel>) :
@@ -34,7 +35,7 @@ class TransactionHistoryAdapter(private var transactionList: List<TransactionHis
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val transaction = transactionList[position]
 
-        val dateFormat = SimpleDateFormat("MM/dd/yy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("dd MMMM YYYY", Locale.getDefault())
         val formattedDate = dateFormat.format(transaction.date)
 
 

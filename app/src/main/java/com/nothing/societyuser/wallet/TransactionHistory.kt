@@ -7,6 +7,7 @@ import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -90,9 +91,10 @@ class TransactionHistory : AppCompatActivity() {
                 for (document in result) {
                     Log.d("Doc", document.id)
 
+                    var date = document.get("date") as Timestamp
                     dummyList.add(
                         createTransactionHistoryModel(
-                            Date(7275227257),
+                            date.toDate(),
                             document.get("amount").toString().toInt(),
                             document.get("completed").toString().toBoolean(),
                             document.id

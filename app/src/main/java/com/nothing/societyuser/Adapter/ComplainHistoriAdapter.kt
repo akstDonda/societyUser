@@ -36,13 +36,12 @@ class ComplainHistoryAdapter(context: Context, var complainList: List<complainHi
         // Load image from URL using Picasso or Glide
         // Replace "complain.img" with the actual URL from complainHistoryModel
 
-        val encodedString = Uri.encode(complain.imgUrl)
 
-
-        Picasso.get()
-            .load(encodedString)
-            .placeholder(R.drawable.baseline_arrow_circle_left_24)
-            .error(R.drawable.baseline_arrow_circle_left_24)
+        Glide.with(context)
+            .load(complain.imgUrl)
+            .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
+            .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+            .centerCrop()
             .into(holder.img)
         // OR
 
