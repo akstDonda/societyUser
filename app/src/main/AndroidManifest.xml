@@ -20,6 +20,14 @@
         android:theme="@style/Theme.SocietyUser"
         tools:targetApi="31">
         <activity
+            android:name=".note.NotesMainActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
+            android:exported="true" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="MyLibraryName" />
+        </activity>
+        <activity
             android:name=".setting.updateUserProfile"
             android:exported="false" />
         <activity
@@ -96,6 +104,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".test.MainActivity"
