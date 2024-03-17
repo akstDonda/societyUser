@@ -24,7 +24,6 @@ class ComplainRaiseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityComplainRaiseBinding
     private var selectedComplaintType: String? = null
-
     private var societyNameSend:String? = null
     private val complainModel = complainModel()
     private val startForProfileImageResult =
@@ -166,9 +165,9 @@ class ComplainRaiseActivity : AppCompatActivity() {
                     .addOnSuccessListener { document ->
                         if (document != null) {
                             // Access the fields you need
-                            var societyId = document.getString("societyId")!!
+                             var societyIdFetch = document.getString("societyId")!!
 
-                                    db.collection("societies").document(societyId).get()
+                                    db.collection("societies").document(societyIdFetch).get()
                                         .addOnSuccessListener { document ->
                                             if (document != null) {
                                                 // Access the fields you need
