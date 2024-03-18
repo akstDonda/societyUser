@@ -23,22 +23,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.Model.HomeCategoryModel
 import com.nothing.societyuser.complain.ComplainRaiseActivity
 import com.nothing.societyuser.databinding.FragmentHomeBinding
+import com.nothing.societyuser.meeting.MeetingMain
+import com.nothing.societyuser.note.NotesMainActivity
 import com.nothing.societyuser.wallet.TransactionHistory
 import com.nothing.societyuser.wallet.WalletActivity
 import com.nothing.societyuser.welcome.HomeActivity
 import com.nothing.societyuser.welcome.MoreCategotyActivity
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
 
@@ -97,14 +89,17 @@ class HomeFragment : Fragment() {
 
                     }
                     2 ->{
-                        intentFun(ComplainRaiseActivity::class.java)
+                        intentFun(MeetingMain::class.java)
 
                     }
                     4->{
                         intentFun(WalletActivity::class.java)
                     }
                     5->{
+                        intentFun(NotesMainActivity::class.java)
 
+                    }
+                    6->{
                         intentFun(MoreCategotyActivity::class.java)
                     }
 
@@ -195,7 +190,9 @@ class HomeFragment : Fragment() {
         categoryList.add(HomeCategoryModel(R.drawable.baseline_meeting_24, "meeting"))
         categoryList.add(HomeCategoryModel(R.drawable.baseline_chat_24, "chat"))
         categoryList.add(HomeCategoryModel(R.drawable.wallet_icon, "wallet"))
+        categoryList.add(HomeCategoryModel(R.drawable.baseline_event_note_24, "Note"))
         categoryList.add(HomeCategoryModel(R.drawable.baseline_more_forward_ios_24, "More"))
+
 
     }
     fun intentFun(destination: Class<*>) {
@@ -245,23 +242,5 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

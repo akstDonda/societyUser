@@ -10,7 +10,8 @@
         android:label="NoteHomeFragment" >
         <action
             android:id="@+id/action_noteHomeFragment_to_noteEditNoteFragment"
-            app:destination="@id/noteEditNoteFragment" /><argument
+            app:destination="@id/noteEditNoteFragment" />
+        <argument
         android:name="note"
         app:argType="com.nothing.societyuser.note.model.Note"
         app:nullable="true"/>

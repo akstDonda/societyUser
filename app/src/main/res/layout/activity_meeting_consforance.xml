@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".meeting.MeetingConsforanceActivity"
-    android:background="@color/material_dynamic_primary80">
+    android:background="@color/primary_color">
 
     <RelativeLayout
         android:layout_width="match_parent"
