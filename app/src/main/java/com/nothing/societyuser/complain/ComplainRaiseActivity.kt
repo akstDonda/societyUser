@@ -166,7 +166,6 @@ class ComplainRaiseActivity : AppCompatActivity() {
                         if (document != null) {
                             // Access the fields you need
                              var societyIdFetch = document.getString("societyId")!!
-
                                     db.collection("societies").document(societyIdFetch).get()
                                         .addOnSuccessListener { document ->
                                             if (document != null) {

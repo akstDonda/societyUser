@@ -6,11 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
 import com.nothing.societyuser.Model.complainHistoryModel
 import com.nothing.societyuser.R
 import com.nothing.societyuser.complain.ComplainRaiseHistory
@@ -55,6 +57,27 @@ class ComplainHistoryAdapter(context: Context, var complainList: List<complainHi
 
         holder.status.text = "Status: ${complain.status}"
         holder.description.text = "Description: ${complain.description}"
+
+//        holder.deleteBtn.setOnClickListener {
+//            val complain = complainList[position]
+//
+//            // Get a reference to the Firebase database node containing your complains
+//            val databaseReference = FirebaseDatabase.getInstance().getReference("complains")
+//
+//            // Assuming each complain has a unique ID, you can use it to remove the complain from the database
+//            databaseReference.child(complain.id).removeValue()
+//                .addOnSuccessListener {
+//                    // If deletion from Firebase is successful, also remove the item from the local list
+//                    complainList = complainList.filter { it.id != complain.id }
+//                    notifyDataSetChanged()
+//                    Toast.makeText(context, "Complain deleted successfully", Toast.LENGTH_SHORT).show()
+//                }
+//                .addOnFailureListener {
+//                    // Handle any errors that occur during deletion
+//                    Log.e("ComplainHistoryAdapter", "Error deleting complain: ${it.message}")
+//                    Toast.makeText(context, "Failed to delete complain", Toast.LENGTH_SHORT).show()
+//                }
+//        }
     }
 
     override fun getItemCount(): Int {
@@ -68,6 +91,9 @@ class ComplainHistoryAdapter(context: Context, var complainList: List<complainHi
         val date: TextView = itemView.findViewById(R.id.complain_history_date)
         val status: TextView = itemView.findViewById(R.id.complain_history_status)
         val description: TextView = itemView.findViewById(R.id.complain_history_desc)
+
+//        val updateBtn:Button = itemView.findViewById(R.id.complain_update_btn);
+//        val deleteBtn:Button = itemView.findViewById(R.id.complain_delete_btn);
     }
 
     fun updateData(complainList: List<complainHistoryModel>) {
