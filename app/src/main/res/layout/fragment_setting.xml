@@ -33,7 +33,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/primary_color"
                     android:layout_gravity="center_vertical"
                     app:cardCornerRadius="@dimen/_50sdp">
 
@@ -41,7 +40,7 @@
                         android:id="@+id/user_profile_image_setting"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:background="@color/primary_color"
+
                         />
                 </androidx.cardview.widget.CardView>
 
@@ -65,6 +64,7 @@
                             android:textColor="@color/primary_color"
                             android:textSize="@dimen/_20sdp"/>
                         <ImageButton
+                            android:id="@+id/editProfile_extra_btn"
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_28sdp"
                             android:background="@android:color/transparent"
@@ -73,6 +73,7 @@
                             />
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/attitude_user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_11ssp"

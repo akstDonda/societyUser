@@ -81,18 +81,29 @@
             android:padding="@dimen/_10sdp"
             tools:ignore="HardcodedText" />
 
-        <EditText
-            android:id="@+id/login_password_edt"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:background="@drawable/edit_text_background"
-            android:hint="Enter Your Password"
-            android:inputType="textPassword"
-            android:padding="@dimen/_10sdp"
-            tools:ignore="HardcodedText" />
+            android:layout_marginEnd="@dimen/_15sdp">
+
+            <EditText
+                android:id="@+id/login_password_edt"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_background"
+                android:hint="Enter Your Password"
+                android:padding="@dimen/_10sdp"
+                android:inputType="textPassword"
+                android:longClickable="false"
+                android:drawableRight="@drawable/baseline_remove_red_eye_24"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/btn_txt_forgot"
             android:layout_width="wrap_content"
@@ -149,12 +160,12 @@
             android:textStyle="italic" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/google_login_btn"
+            android:layout_width="64dp"
+            android:layout_height="66dp"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/_19sdp"
             android:layout_marginTop="@dimen/_24sdp"
-            android:layout_gravity="center"
             app:cardCornerRadius="@dimen/_6sdp"
             app:cardElevation="2dp">
 
@@ -163,8 +174,8 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:src="@drawable/google_black"
                 android:padding="@dimen/_2sdp"
+                android:src="@drawable/google_black"
                 android:textAlignment="center"
                 app:layout_constraintHorizontal_bias="0.333" />
         </androidx.cardview.widget.CardView>

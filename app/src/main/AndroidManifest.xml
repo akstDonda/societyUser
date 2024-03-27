@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocietyUser"
+        android:screenOrientation="portrait"
         tools:targetApi="31">
         <activity
             android:name=".note.NotesMainActivity"
@@ -44,7 +45,8 @@
             android:exported="false" />
         <activity
             android:name=".welcome.MoreCategotyActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme_title"/>
         <activity
             android:name=".welcome.SettingActivity"
             android:exported="false"
@@ -83,19 +85,22 @@
             android:exported="false" />
         <activity
             android:name=".welcome.RegistrationActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".welcome.LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+             />
         <activity
             android:name=".welcome.WelcomeSignUpLogin"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".wallet.TransactionHistory"
             android:exported="false" />
         <activity
             android:name=".welcome.SplashActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:label="@string/title_activity_splash"
             android:theme="@style/Theme.SocietyUser">

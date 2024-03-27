@@ -17,6 +17,8 @@ class MoreCategotyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMoreCategotyBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.show()
+        supportActionBar?.title = "Categories"
 
         // Assuming you have a RecyclerView in your layout with the id "recyclerView"
 

@@ -2,7 +2,10 @@ package com.nothing.societyuser.welcome
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -10,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.nothing.societyuser.R
 import com.nothing.societyuser.databinding.ActivityRegistrationBinding
 import com.nothing.societyuser.fragment.BottomActivity
 
@@ -20,6 +24,8 @@ class RegistrationActivity : AppCompatActivity() {
     private lateinit var societyAdapter: ArrayAdapter<String>
     private var societyId: String = ""
     var societiesMembers: HashMap<String, List<String>> = HashMap()
+    var passwordVisibleMain:Boolean = false;
+    var passwordVisible:Boolean = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +57,7 @@ class RegistrationActivity : AppCompatActivity() {
         //Intent Back Button
         binding.registraionBackBtn.setOnClickListener {
             intentFun(WelcomeSignUpLogin::class.java)
+
         }
 
         //Intent Registation Button
@@ -61,6 +68,53 @@ class RegistrationActivity : AppCompatActivity() {
         //Text Intent to Login
         binding.loginTextBtn.setOnClickListener {
             intentFun(LoginActivity::class.java)
+        }
+
+
+        //hide and show password
+        binding.registationPasswordEdt.setOnTouchListener { v, event ->
+
+            val Right = 2
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= binding.registationPasswordEdt.right - binding.registationPasswordEdt.compoundDrawables[Right].bounds.width()) {
+                    val selection = binding.registationPasswordEdt.selectionEnd
+                    if (passwordVisibleMain) {
+                        binding.registationPasswordEdt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                        binding.registationPasswordEdt.transformationMethod = PasswordTransformationMethod.getInstance()
+                        passwordVisibleMain = false
+                    } else {
+                        binding.registationPasswordEdt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                        binding.registationPasswordEdt.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        passwordVisibleMain = true
+                    }
+                    binding.registationPasswordEdt.setSelection(selection)
+                    return@setOnTouchListener true
+                }
+            }
+            false // Consume the touch event
+        }
+
+        //hide and show conform password
+        binding.registationRePasswordEdt.setOnTouchListener { v, event ->
+
+            val Right = 2
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= binding.registationRePasswordEdt.right - binding.registationRePasswordEdt.compoundDrawables[Right].bounds.width()) {
+                    val selection = binding.registationRePasswordEdt.selectionEnd
+                    if (passwordVisible) {
+                        binding.registationRePasswordEdt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                        binding.registationRePasswordEdt.transformationMethod = PasswordTransformationMethod.getInstance()
+                        passwordVisible = false
+                    } else {
+                        binding.registationRePasswordEdt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                        binding.registationRePasswordEdt.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        passwordVisible = true
+                    }
+                    binding.registationRePasswordEdt.setSelection(selection)
+                    return@setOnTouchListener true
+                }
+            }
+            false // Consume the touch event
         }
     }
 

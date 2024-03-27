@@ -24,7 +24,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityComplainRaiseBinding
     private var selectedComplaintType: String? = null
-    private var societyNameSend:String? = null
+    private var societyNameSend: String? = null
     private val complainModel = complainModel()
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -36,7 +36,8 @@ class ComplainRaiseActivity : AppCompatActivity() {
                 val fileUri = data?.data ?: return@registerForActivityResult
                 uploadImage(fileUri)
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                Toast.makeText(this, "Error: ${ImagePicker.getError(data)}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error: ${ImagePicker.getError(data)}", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
@@ -106,7 +107,8 @@ class ComplainRaiseActivity : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error uploading image: ${it.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error uploading image: ${it.message}", Toast.LENGTH_SHORT)
+                    .show()
                 resetUI()
             }
     }
@@ -156,47 +158,51 @@ class ComplainRaiseActivity : AppCompatActivity() {
     }
 
 
+    fun UserDataFetch() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+        if (uid != null) {
+            db.collection("member").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        // Access the fields you need
+                        var societyIdFetch = document.getString("societyId")!!
+                        db.collection("societies").document(societyIdFetch).get()
+                            .addOnSuccessListener { document ->
+                                if (document != null) {
+                                    // Access the fields you need
+                                    val societyName = document.getString("name")
+                                    Toast.makeText(
+                                        this,
+                                        "Society Name: $societyName",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
-        fun UserDataFetch() {
-            val uid = FirebaseAuth.getInstance().currentUser?.uid
-            val db = FirebaseFirestore.getInstance()
-            if (uid != null) {
-                db.collection("member").document(uid).get()
-                    .addOnSuccessListener { document ->
-                        if (document != null) {
-                            // Access the fields you need
-                             var societyIdFetch = document.getString("societyId")!!
-                                    db.collection("societies").document(societyIdFetch).get()
-                                        .addOnSuccessListener { document ->
-                                            if (document != null) {
-                                                // Access the fields you need
-                                                val societyName = document.getString("name")
-                                                Toast.makeText(this, "Society Name: $societyName", Toast.LENGTH_SHORT).show()
-
-                                                // Update the UI on the main thread
-                                                runOnUiThread {
-                                                    if (societyName != null) {
+                                    // Update the UI on the main thread
+                                    runOnUiThread {
+                                        if (societyName != null) {
 //                                                        binding.profileSocNameTxt.text = societyName
-                                                        societyNameSend = societyName
-                                                    }
-                                                }
-                                            } else {
-                                                println("No such document")
-                                            }
+                                            societyNameSend = societyName
                                         }
-                                        .addOnFailureListener { exception ->
-                                            println("Error getting documents: $exception")
-                                        }
-
-                                    //end
-
+                                    }
+                                } else {
+                                    println("No such document")
                                 }
                             }
-                        } else {
-                            println("No such document")
-                        }
+                            .addOnFailureListener { exception ->
+                                println("Error getting documents: $exception")
+                            }
+
+                        //end
+
                     }
-
-
-
+                }
+        } else {
+            println("No such document")
+        }
+    }
 }
+
+
+
+

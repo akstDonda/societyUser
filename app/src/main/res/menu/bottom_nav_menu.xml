@@ -4,20 +4,24 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="@color/white"
         android:title="Home" />
 
     <item
         android:id="@+id/navigation_complain"
-        android:icon="@drawable/baseline_add_complain_24"
+        android:icon="@drawable/complain_icon_white"
+        android:iconTint="@color/white"
         android:title="complain" />
 
     <item
         android:id="@+id/navigation_meeting"
-        android:icon="@drawable/baseline_meeting_24"
+        android:icon="@drawable/meeting_white"
+        android:iconTint="@color/white"
         android:title="meeting" />
     <item
         android:id="@+id/navigation_setting"
-        android:icon="@drawable/setting_icon_24"
+        android:icon="@drawable/baseline_settings_24"
+        android:iconTint="@color/white"
         android:title="setting" />
 
 </menu>

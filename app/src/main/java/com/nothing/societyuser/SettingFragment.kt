@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
+import com.nothing.societyuser.databinding.ActivityUpdateUserProfileBinding
 import com.nothing.societyuser.databinding.FragmentSettingBinding
 import com.nothing.societyuser.setting.ChangePasswordActivity
 import com.nothing.societyuser.setting.UserProfileActivity
 import com.nothing.societyuser.setting.cutomer_care
 import com.nothing.societyuser.setting.informationAcctivity
+import com.nothing.societyuser.setting.updateUserProfile
 import com.nothing.societyuser.welcome.LoginActivity
 
 class SettingFragment : Fragment() {
@@ -45,6 +48,11 @@ class SettingFragment : Fragment() {
         binding.llCustomerCare.setOnClickListener(){
             //TODO:activity name change
             val intent = Intent(requireActivity(), cutomer_care::class.java)
+            startActivity(intent)
+        }
+
+        binding.editProfileExtraBtn.setOnClickListener(){
+            val intent = Intent(requireActivity(), updateUserProfile::class.java)
             startActivity(intent)
         }
 
@@ -91,10 +99,12 @@ class SettingFragment : Fragment() {
                             if (userName != null && binding != null) {
                                 var finalUserName:String = "Hello, "+userName
                                 binding!!.userProfileTxtSetting.text = finalUserName
+                                binding!!.attitudeUserName.text =
+                                    "Don’t tell anyone, but I’m $userName ."
                                 Glide.with(this)
                                     .load(userImage)
-                                    .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
-                                    .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+                                    .placeholder(R.drawable.user_image_place_holder) // Optional placeholder image while loading
+                                    .error(R.drawable.user_image_place_holder) // Optional error image if loading fails
                                     .centerCrop()
                                     .into(binding!!.userProfileImageSetting)
 

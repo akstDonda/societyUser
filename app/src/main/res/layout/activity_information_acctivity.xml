@@ -17,7 +17,7 @@
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
@@ -38,22 +38,24 @@
                 android:textSize="@dimen/_20sdp"
                 android:gravity="center"
                 />
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                android:padding="@dimen/_2sdp"
-                android:layout_gravity="end"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="@dimen/_2sdp"
+            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
@@ -74,21 +76,23 @@
                 android:textSize="@dimen/_20sdp"
                 android:gravity="center"
                 />
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                android:padding="@dimen/_2sdp"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="@dimen/_2sdp"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
@@ -109,21 +113,23 @@
                 android:textSize="@dimen/_20sdp"
                 android:gravity="center"
                 />
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                android:padding="@dimen/_2sdp"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="@dimen/_2sdp"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
@@ -144,20 +150,22 @@
                 android:textSize="@dimen/_20sdp"
                 android:gravity="center"
                 />
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                android:padding="@dimen/_2sdp"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="@dimen/_2sdp"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+    <View android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="@color/primary_color"/><LinearLayout
+        android:background="@color/primary_color"/>
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="0.8">
@@ -178,20 +186,23 @@
             android:textSize="@dimen/_20sdp"
             android:gravity="center"
             />
+
+    </LinearLayout>
         <ImageView
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
             android:src="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="@dimen/_2sdp"
             android:gravity="center"
+            android:layout_alignParentEnd="true"
             />
-    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="@color/primary_color"/><LinearLayout
+        android:background="@color/primary_color"/>
+    <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="0.8">
@@ -212,21 +223,23 @@
             android:textSize="@dimen/_20sdp"
             android:gravity="center"
             />
+
+    </LinearLayout>
         <ImageView
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
             android:src="@drawable/baseline_keyboard_arrow_right_24"
             android:padding="@dimen/_2sdp"
             android:gravity="center"
+            android:layout_alignParentEnd="true"
             />
-    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
@@ -247,20 +260,22 @@
                 android:textSize="@dimen/_20sdp"
                 android:gravity="center"
                 />
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                android:padding="@dimen/_2sdp"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="@dimen/_2sdp"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
-        android:background="@color/primary_color"/><LinearLayout
+        android:background="@color/primary_color"/><RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="0.8">
@@ -281,21 +296,23 @@
             android:textSize="@dimen/_20sdp"
             android:gravity="center"
             />
-        <ImageView
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="match_parent"
-            android:src="@drawable/baseline_keyboard_arrow_right_24"
-            android:padding="@dimen/_2sdp"
-            android:gravity="center"
-            />
-    </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="match_parent"
+        android:src="@drawable/baseline_keyboard_arrow_right_24"
+        android:padding="@dimen/_2sdp"
+        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        />
+
+</RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
@@ -316,20 +333,35 @@
                 android:textSize="@dimen/_20sdp"
                 android:gravity="center"
                 />
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="match_parent"
-                android:src="@drawable/baseline_keyboard_arrow_right_24"
-                android:padding="@dimen/_2sdp"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_keyboard_arrow_right_24"
+            android:padding="@dimen/_2sdp"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@color/primary_color"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customer Care"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:backgroundTint="@color/Primary_color"/>
+
+
+
+
+
 
 
 

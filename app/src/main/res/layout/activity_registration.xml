@@ -103,6 +103,8 @@
             android:hint="Enter Your Password"
             android:inputType="textPassword"
             android:padding="@dimen/_10sdp"
+            android:longClickable="false"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             tools:ignore="HardcodedText" />
 
         <EditText
@@ -116,6 +118,8 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:inputType="textPassword"
+            android:longClickable="false"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             tools:ignore="HardcodedText" />
 
         <AutoCompleteTextView

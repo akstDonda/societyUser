@@ -12,6 +12,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.nothing.societyuser.Model.complainModel
@@ -24,6 +26,8 @@ class ComplainFragment : Fragment() {
     private var _binding: FragmentComplainBinding? = null
     private val binding get() = _binding!!
     private var selectedComplaintType: String? = null
+    private var societyNameSend:String? = null
+
     private val complainModel = complainModel()
 
     private val startForProfileImageResult =
@@ -53,6 +57,7 @@ class ComplainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        UserDataFetch()
         // Select image
         binding.complainImage.setOnClickListener {
             ImagePicker.with(requireActivity())
@@ -129,7 +134,7 @@ class ComplainFragment : Fragment() {
         complainModel.type = selectedComplaintType ?: "Default value or handle null case"
         complainModel.title = binding.editTextComplainTitle.text.toString()
         complainModel.description = binding.editTextIssueDescription.text.toString()
-
+        complainModel.societyName = societyNameSend.toString()
         complainModel.upload(requireContext())
         toastFun("Complaint submitted successfully.")
 
@@ -156,6 +161,58 @@ class ComplainFragment : Fragment() {
         binding.spinKit.visibility = View.GONE
         binding.complainRootLl.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.white))
     }
+
+    //start
+    fun UserDataFetch() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+        if (uid != null) {
+            db.collection("member").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        // Access the fields you need
+                        val societyIdFetch = document.getString("societyId")!!
+                        db.collection("societies").document(societyIdFetch).get()
+                            .addOnSuccessListener { document ->
+                                if (document != null) {
+                                    // Access the fields you need
+                                    val societyName = document.getString("name")
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Society Name: $societyName",
+//                                        Toast.LENGTH_SHORT
+//                                    ).show()
+
+                                    // Update the UI on the main thread
+                                        activity?.runOnUiThread {
+                                        if (societyName != null) {
+                                            // Access views using the fragment's layout
+                                            // For example:
+                                            // val profileSocNameTxt = fragment.requireView().findViewById<TextView>(R.id.profileSocNameTxt)
+                                            // profileSocNameTxt.text = societyName
+                                            societyNameSend = societyName
+                                        }
+                                    }
+                                } else {
+                                    println("No such document")
+                                }
+                            }
+                            .addOnFailureListener { exception ->
+                                println("Error getting documents: $exception")
+                            }
+
+                        //end
+
+                    }
+                }
+        } else {
+            println("No such document")
+        }
+    }
+
+    //end
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

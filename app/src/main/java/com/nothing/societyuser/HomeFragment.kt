@@ -1,23 +1,18 @@
 package com.nothing.societyuser
 
 import HomeCategoryAdapter
-import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView.ScaleType
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.codebyashish.autoimageslider.AutoImageSlider
 import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
-import com.google.android.material.slider.Slider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.Model.HomeCategoryModel
@@ -75,6 +70,14 @@ class HomeFragment : Fragment() {
         binding!!.claimBtnHomeBig.setOnClickListener(){
             intentFun(ComplainRaiseActivity::class.java)
         }
+
+        //under line
+        binding!!.moreTxtButton.setPaintFlags(binding!!.moreTxtButton.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
+        binding!!.moreTxtButton.setOnClickListener(){
+
+            intentFun(MoreCategotyActivity::class.java)
+        }
+
 
 
         adapter.onItemClickListener = object : HomeCategoryAdapter.OnItemClickListener {
@@ -218,8 +221,8 @@ class HomeFragment : Fragment() {
                                 binding!!.helloUserNameTxtHome.text = finalUserName
                                 Glide.with(this)
                                     .load(userImage)
-                                    .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
-                                    .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+                                    .placeholder(R.drawable.user_image_place_holder) // Optional placeholder image while loading
+                                    .error(R.drawable.user_image_place_holder) // Optional error image if loading fails
                                     .centerCrop()
                                     .into(binding!!.userImageHomefragment)
 
