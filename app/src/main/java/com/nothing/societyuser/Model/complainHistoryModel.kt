@@ -9,15 +9,24 @@ import java.util.Date
 
 data class complainHistoryModel(
     var imgUrl: String,
-    var type:String,
-    var title:String,
-    var date:Date,
-    var status:String,
-    var description:String,
+    var type: String,
+    var title: String,
+    var date: Date,
+    var status: String,
+    var description: String,
+    val userHouse: String,
 )
 
-public fun createComplainHistory(img:String,type:String,title:String,date:Date,status:String,description:String, intent: Context){
-    val complainHistoryModel = complainHistoryModel(img,type,title,date,status,description)
+public fun createComplainHistory(img:String,type:String,title:String,date:Date,status:String,description:String,intent: Context){
+    val complainHistoryModel = complainHistoryModel(
+        img,
+        type,
+        title,
+        date,
+        status,
+        description,
+        "default 111, check ComplainRaiseHistory > createComplainHistory()"
+    )
 
     val fireStore = Firebase.firestore
     val auth = Firebase.auth

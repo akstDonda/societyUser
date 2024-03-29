@@ -70,6 +70,19 @@ class PayAdmin : AppCompatActivity() {
                                     handleCurrentAmount(currentAmount) // Handle the currentAmount value
                                     transactionProcessed = true // Set the flag to true after processing the transaction
 
+                                    var socId = documentSnapshot.getString("societyId")
+                                    firestore.collection("societies").document(socId!!).get().addOnSuccessListener {
+                                        var amount = it.getDouble("currentAmount")
+
+                                        if (amount != null) {
+                                            amount += transactionAmount
+                                        }
+                                        else {
+                                            amount = transactionAmount
+                                        }
+                                        firestore.collection("societies").document(socId).update("currentAmount", amount)
+                                    }
+
                                     val transactionId: String? = intent.getStringExtra("transactionId")
                                     payTransaction(transactionId!!, this)
                                 }

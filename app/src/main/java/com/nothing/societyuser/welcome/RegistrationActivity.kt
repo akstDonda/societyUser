@@ -93,7 +93,6 @@ class RegistrationActivity : AppCompatActivity() {
             }
             false // Consume the touch event
         }
-
         //hide and show conform password
         binding.registationRePasswordEdt.setOnTouchListener { v, event ->
 

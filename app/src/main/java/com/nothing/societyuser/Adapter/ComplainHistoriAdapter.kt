@@ -1,30 +1,23 @@
 package com.nothing.societyuser.Adapter
 
 import android.content.Context
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.database.FirebaseDatabase
 import com.nothing.societyuser.Model.complainHistoryModel
 import com.nothing.societyuser.R
-import com.nothing.societyuser.complain.ComplainRaiseHistory
-import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
-class ComplainHistoryAdapter(context: Context, var complainList: List<complainHistoryModel>) :
+class ComplainHistoryAdapter(context: Context, var complainList: MutableList<complainHistoryModel>) :
     RecyclerView.Adapter<ComplainHistoryAdapter.ComplainHistoryViewHolder>() {
 
-        var context: Context = context
-
+    var context: Context = context
+    var complainListMaster = complainList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplainHistoryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.single_item_complain_history, parent, false)
@@ -57,6 +50,8 @@ class ComplainHistoryAdapter(context: Context, var complainList: List<complainHi
 
         holder.status.text = "Status: ${complain.status}"
         holder.description.text = "Description: ${complain.description}"
+
+        holder.homeNumber.text = "Home No: ${complain.userHouse}"
 
 //        holder.deleteBtn.setOnClickListener {
 //            val complain = complainList[position]
@@ -91,13 +86,28 @@ class ComplainHistoryAdapter(context: Context, var complainList: List<complainHi
         val date: TextView = itemView.findViewById(R.id.complain_history_date)
         val status: TextView = itemView.findViewById(R.id.complain_history_status)
         val description: TextView = itemView.findViewById(R.id.complain_history_desc)
+        val homeNumber: TextView = itemView.findViewById(R.id.home_no)
 
 //        val updateBtn:Button = itemView.findViewById(R.id.complain_update_btn);
 //        val deleteBtn:Button = itemView.findViewById(R.id.complain_delete_btn);
     }
 
     fun updateData(complainList: List<complainHistoryModel>) {
-        this.complainList = complainList
+        this.complainList = complainList.toMutableList()
+        this.complainListMaster = complainList.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    fun updateQuery(query: String) {
+        this.complainList = mutableListOf()
+
+        for (complain in complainListMaster) {
+            if (complain.title.contains(query, ignoreCase = true) || complain.type.contains(query, ignoreCase = true) || complain.description.contains(query, ignoreCase = true)
+                || SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(complain.date).contains(query, ignoreCase = true)) {
+                this.complainList.add(complain)
+            }
+        }
+
         notifyDataSetChanged()
     }
 }

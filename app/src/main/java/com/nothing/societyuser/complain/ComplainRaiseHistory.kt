@@ -2,8 +2,8 @@ package com.nothing.societyuser.complain
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
@@ -12,11 +12,12 @@ import com.google.firebase.firestore.firestore
 import com.nothing.societyuser.Adapter.ComplainHistoryAdapter
 import com.nothing.societyuser.Model.complainHistoryModel
 import com.nothing.societyuser.databinding.ActivityComplainRaiseHistoryBinding
-import java.util.*
 
 class ComplainRaiseHistory : AppCompatActivity() {
     // Your existing code...
+    var searchList: List<complainHistoryModel> = listOf()
     private  lateinit var binding: ActivityComplainRaiseHistoryBinding
+    var adapter: ComplainHistoryAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityComplainRaiseHistoryBinding.inflate(layoutInflater)
@@ -25,9 +26,22 @@ class ComplainRaiseHistory : AppCompatActivity() {
         // Dummy data for testing
         var dummyData: List<complainHistoryModel> = listOf()
 
+        var searchView = binding.complainSearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter?.updateQuery(newText!!)
+                return true
+            }
+        })
+
         // Initialize RecyclerView and set up the adapter
         binding.complainRaiseHistoryRv.layoutManager = LinearLayoutManager(this)
-        val adapter = ComplainHistoryAdapter(this,dummyData)
+       adapter = ComplainHistoryAdapter(this,dummyData.toMutableList())
         binding.complainRaiseHistoryRv.adapter = adapter
 
         val db = Firebase.firestore
@@ -48,11 +62,11 @@ class ComplainRaiseHistory : AppCompatActivity() {
 //                                Toast.makeText(this@ComplainRaiseHistory, url.toString(), Toast.LENGTH_SHORT).show()
 
                                 var status = "Pending"
-                                if (data["resolved"] == "true")
-                                    status = "Resolved!"
-                                else if (data["approved"] == "true") {
+                                if (data["approved"] == true)
                                     status = "Approved!"
-                                } else if (data["rejected"] == "true") {
+                                else if (data["resolved"] == true) {
+                                    status = "Resolved!"
+                                } else if (data["rejected"] == true) {
                                     status = "Rejected!"
                                 }
 
@@ -65,13 +79,17 @@ class ComplainRaiseHistory : AppCompatActivity() {
                                         timestamp.toDate(),
                                         status,
                                         data["description"] as String,
+                                        data["userHouseNo"] as String
                                     )
                                 )
                             }
 
-                            adapter.updateData(dummyData)
+                            adapter!!.updateData(dummyData)
                         }
                 }
             }
+
     }
+
+
 }

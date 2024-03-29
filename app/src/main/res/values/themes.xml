@@ -10,6 +10,7 @@
 
     <style name="Theme.SocietyUser" parent="Base.Theme.SocietyUser">
         <!-- Customize specific theme attributes if needed -->
+
     </style>
 
     <style name="AppTheme_title" parent="Theme.AppCompat.Light.DarkActionBar">

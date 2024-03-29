@@ -25,6 +25,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityComplainRaiseBinding
     private var selectedComplaintType: String? = null
     private var societyNameSend: String? = null
+    private var HouseNumber: String? = null
     private val complainModel = complainModel()
     private val startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -65,6 +66,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
 
         // Handle submit button click
         binding.submitComplainBtn.setOnClickListener {
+
             selectedComplaintType = binding.complainSelectSpinnerBtn.text.toString()
 
             if (selectedComplaintType.isNullOrEmpty() || selectedComplaintType == "--select no of--") {
@@ -127,6 +129,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
         complainModel.title = binding.editTextComplainTitle.text.toString()
         complainModel.description = binding.editTextIssueDescription.text.toString()
         UserDataFetch()
+        complainModel.userHouseNo = HouseNumber.toString()
         complainModel.societyName = societyNameSend.toString()
 
         complainModel.upload(this)
@@ -167,6 +170,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
                     if (document != null) {
                         // Access the fields you need
                         var societyIdFetch = document.getString("societyId")!!
+                        HouseNumber = document.getString("userHouseNo")
                         db.collection("societies").document(societyIdFetch).get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
