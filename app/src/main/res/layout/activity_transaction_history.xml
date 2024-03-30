@@ -17,7 +17,7 @@
         android:layout_marginVertical="@dimen/_10sdp">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/complain_searchView"
+            android:id="@+id/transaction_searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

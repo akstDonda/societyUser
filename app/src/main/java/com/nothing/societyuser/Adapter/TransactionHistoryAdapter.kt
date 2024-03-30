@@ -1,4 +1,5 @@
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TransactionHistoryAdapter(private var transactionList: List<TransactionHistoryModel>) :
+class TransactionHistoryAdapter(private var transactionList: MutableList<TransactionHistoryModel>) :
     RecyclerView.Adapter<TransactionHistoryAdapter.ViewHolder>() {
 
-
+    var transactionMaster = transactionList
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val dateTextView: TextView = itemView.findViewById(R.id.transaction_date)
@@ -42,7 +43,13 @@ class TransactionHistoryAdapter(private var transactionList: List<TransactionHis
 
         holder.dateTextView.text = "Date: $formattedDate"
         holder.amountTextView.text = "Amount: ${transaction.amount}"
-        holder.statusTextView.text = "Status: ${transaction.status}"
+//        holder.statusTextView.text = "Status: ${transaction.status}"
+
+        if (transaction.status == true){
+            holder.statusTextView.text = "Status: Complete"
+        }else{
+            holder.statusTextView.text = "Status: pending"
+        }
         if (transaction.status) { // Assuming transaction.status is a boolean
             holder.button.visibility = View.GONE
         } else {
@@ -66,7 +73,26 @@ class TransactionHistoryAdapter(private var transactionList: List<TransactionHis
 
     // Update the data in the adapter
     fun updateData(newTransactionList: List<TransactionHistoryModel>) {
-        transactionList = newTransactionList
+
+        this.transactionList = newTransactionList.toMutableList()
+        this.transactionMaster = newTransactionList.toMutableList()
+
         notifyDataSetChanged()
     }
+
+    fun updateQuery(query: String) {
+        this.transactionList = mutableListOf()
+        Log.d("query", query)
+
+        for (transaction in transactionMaster) {
+            Log.d("transaction", transaction.amount.toString())
+            if (transaction.amount.toString().contains(query, ignoreCase = true) || SimpleDateFormat("dd MMMM YYYY", Locale.getDefault()).format(transaction.date).contains(query, ignoreCase = true)) {
+                this.transactionList.add(transaction)
+            }
+        }
+
+        notifyDataSetChanged()
+    }
+
+
 }
