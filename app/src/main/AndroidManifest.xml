@@ -13,17 +13,23 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_black_primary"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_black_primary"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.SocietyUser"
-        android:screenOrientation="portrait"
         tools:targetApi="31">
         <activity
+            android:name=".animation_after_login"
+            android:exported="false" />
+        <activity
+            android:name=".animation_after_sign_up"
+            android:exported="false" />
+        <activity
             android:name=".note.NotesMainActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
-            android:exported="true" >
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="MyLibraryName" />
@@ -46,7 +52,7 @@
         <activity
             android:name=".welcome.MoreCategotyActivity"
             android:exported="true"
-            android:theme="@style/AppTheme_title"/>
+            android:theme="@style/AppTheme_title" />
         <activity
             android:name=".welcome.SettingActivity"
             android:exported="false"
@@ -86,30 +92,28 @@
         <activity
             android:name=".welcome.RegistrationActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".welcome.LoginActivity"
-            android:exported="false"
-             />
+            android:exported="false" />
         <activity
             android:name=".welcome.WelcomeSignUpLogin"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".wallet.TransactionHistory"
             android:exported="false" />
         <activity
             android:name=".welcome.SplashActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
             android:label="@string/title_activity_splash"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.SocietyUser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".test.MainActivity"

@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.nothing.societyuser.R
+import com.nothing.societyuser.animation_after_login
 import com.nothing.societyuser.databinding.ActivityLoginBinding
 import com.nothing.societyuser.fragment.BottomActivity
 
@@ -35,10 +36,12 @@ class LoginActivity : AppCompatActivity() {
         //back button intent
         binding.loginBackBtn.setOnClickListener{
             intentFun(WelcomeSignUpLogin::class.java)
+            finish()
         }
         //Text Intent to registation
         binding.registationTextBtn.setOnClickListener {
             intentFun(RegistrationActivity::class.java)
+            finish()
         }
         //forgot password
         binding.btnTxtForgot.setOnClickListener(){
@@ -94,8 +97,9 @@ class LoginActivity : AppCompatActivity() {
             changeProgress(false)
             if (it.isSuccessful){
                 //login is success
-                var intent = Intent(this, BottomActivity::class.java)
+                var intent = Intent(this, animation_after_login::class.java)
                 startActivity(intent)
+                finish()
 
             }else{
                 toastFun("enter right password and email")

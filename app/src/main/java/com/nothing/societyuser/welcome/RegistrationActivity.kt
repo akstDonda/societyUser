@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.R
+import com.nothing.societyuser.animation_after_sign_up
 import com.nothing.societyuser.databinding.ActivityRegistrationBinding
 import com.nothing.societyuser.fragment.BottomActivity
 
@@ -130,7 +131,7 @@ class RegistrationActivity : AppCompatActivity() {
         societyNameAutoComplete.setOnItemClickListener { _, _, position, _ ->
             val societyName = societyAdapter.getItem(position) ?: ""
             societyId = societies.entries.find { it.value == societyName }?.key ?: ""
-            Toast.makeText(this, "Selected Society: $societyId", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Selected Society: $societyId", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -188,7 +189,8 @@ class RegistrationActivity : AppCompatActivity() {
                                 db.collection("societies").document(societyId).update("memberIDs", new)
                                     .addOnSuccessListener {
                                     toastFun("Welcome")
-                                    intentFun(BottomActivity::class.java)
+                                    intentFun(animation_after_sign_up::class.java)
+                                        finish()
                                     user.sendEmailVerification()
                                 }
                             }

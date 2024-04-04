@@ -33,4 +33,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/pink</item>
     </style>
+    
+    <style name="bottomTheme" >
+        <item name="android:color">@color/light_white</item>
+    </style>
+        
+        
 </resources>

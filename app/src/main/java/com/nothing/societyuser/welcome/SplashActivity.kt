@@ -42,6 +42,7 @@ class SplashActivity : AppCompatActivity() {
     fun intentFun(destination : Class<*>){
         var intent = Intent(this, destination)
         startActivity(intent)
+        finish()
 
     }
     //toast

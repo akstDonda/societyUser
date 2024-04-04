@@ -17,10 +17,12 @@ class WelcomeSignUpLogin : AppCompatActivity() {
         //login button intent
         binding.btnLoginWelcome.setOnClickListener {
             btnIntent(LoginActivity::class.java)
+            finish()
         }
         //signUp button intent
         binding.btnRegWelcome.setOnClickListener {
             btnIntent(RegistrationActivity::class.java)
+            finish()
         }
 
     }

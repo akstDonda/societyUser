@@ -57,6 +57,7 @@
 
             </LinearLayout>
             <ImageView
+                android:id="@+id/img_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_notifications_black_24dp"
@@ -70,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_margin="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_weight="4.5"
             app:cardCornerRadius="@dimen/_15sdp">
@@ -79,10 +81,11 @@
                 android:id="@+id/autoImageSlider"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/primary_color"
+
                 app:ais_auto_sliding="true"
                 app:ais_corner_radius="30"
                 app:ais_indicator_align="@string/center"
-                android:background="@color/primary_color"
                 app:ais_placeholder="@drawable/placeholder_default_loading"
                 app:ais_time_interval="3000"
                 app:ais_title_background="@drawable/text_background"

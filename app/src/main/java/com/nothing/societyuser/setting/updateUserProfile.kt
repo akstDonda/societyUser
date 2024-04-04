@@ -3,7 +3,7 @@ package com.nothing.societyuser.setting
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -11,7 +11,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
+import com.bumptech.glide.Glide
+
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
@@ -98,7 +99,7 @@ class updateUserProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        UserDataFetch()
         //update button
         binding.updateFirebaseProfileBtn.setOnClickListener {
 
@@ -112,6 +113,8 @@ class updateUserProfile : AppCompatActivity() {
 
             // Proceed with profile update
             updateProfile()
+            UserDataFetch()
+
 
             // Start UserProfileActivity
             val intent = Intent(this, UserProfileActivity::class.java)
@@ -126,6 +129,7 @@ class updateUserProfile : AppCompatActivity() {
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
                 }
+            UserDataFetch()
 
         }
 
@@ -152,4 +156,52 @@ class updateUserProfile : AppCompatActivity() {
                 Toast.makeText(this, "Failed to update profile: $it", Toast.LENGTH_SHORT).show()
             }
     }
+
+
+    //start
+
+    fun UserDataFetch() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+        if (uid != null) {
+            db.collection("member").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+
+                        val userImage = document.getString("userImage")
+
+                        // Update the UI on the main thread
+                        runOnUiThread {
+                                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+//                                binding.profileSocNameTxt.text = societyId
+
+//                                Toast.makeText(this,societyId.toString(),Toast.LENGTH_SHORT).show()
+
+                                //start socity name fetch
+//                                val uid = FirebaseAuth.getInstance().currentUser?.uid
+//                                val db = FirebaseFirestore.getInstance()
+
+                                Glide.with(this)
+                                    .load(userImage)
+                                    .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
+                                    .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+                                    .into(binding.updateProfileImageBtn)
+
+                        }
+                    } else {
+                        println("No such document")
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    println("Error getting documents: $exception")
+                }
+        }
+    }
+
+
+    //end
+
+
+
+
 }

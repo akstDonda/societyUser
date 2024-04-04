@@ -8,4 +8,8 @@
 
 
     </style>
+
+    <style name="bottomTheme" >
+        <item name="android:color">@color/policy</item>
+    </style>
 </resources>
