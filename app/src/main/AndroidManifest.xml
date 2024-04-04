@@ -21,6 +21,9 @@
         android:theme="@style/Theme.SocietyUser"
         tools:targetApi="31">
         <activity
+            android:name=".welcome.EventActivity"
+            android:exported="false" />
+        <activity
             android:name=".animation_after_login"
             android:exported="false" />
         <activity
@@ -39,19 +42,28 @@
             android:exported="false" />
         <activity
             android:name=".setting.UserProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".fragment.BottomActivity"
+            android:theme="@style/Theme.SocietyUser.title" />
         <activity
             android:name=".setting.informationAcctivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".fragment.BottomActivity"
+            android:theme="@style/Theme.SocietyUser.title" />
         <activity
             android:name=".setting.cutomer_care"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".fragment.BottomActivity"
+            android:theme="@style/Theme.SocietyUser.title" />
         <activity
             android:name=".setting.ChangePasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".fragment.BottomActivity"
+            android:theme="@style/Theme.SocietyUser.title" />
         <activity
             android:name=".welcome.MoreCategotyActivity"
             android:exported="true"
+            android:parentActivityName=".fragment.BottomActivity"
             android:theme="@style/AppTheme_title" />
         <activity
             android:name=".welcome.SettingActivity"

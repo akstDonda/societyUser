@@ -31,7 +31,7 @@ class WalletActivity : AppCompatActivity() {
         //var edtAddMoneyWallet = editTextTAddWalletMoney.toIntOrNull() ?: 0
 
         //Intent for Pay Button
-        binding.payBtnWallet.setOnClickListener() {
+        binding.FastPayBtnWallet.setOnClickListener() {
             val intent = Intent(this, TransactionHistory::class.java)
             startActivity(intent)
         }
@@ -77,10 +77,6 @@ class WalletActivity : AppCompatActivity() {
             }
         }
 
-        //Go For Payment
-        binding.FastPayBtnWallet.setOnClickListener() {
-            intentFun(PayAdmin::class.java)
-        }
     }
 
     //intent

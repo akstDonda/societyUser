@@ -15,6 +15,7 @@ class cutomer_care : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCutomerCareBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Customer Care"
 
         binding.btnIssueSendEmail.setOnClickListener(){
             var content = binding.edtIssueDesc.text.toString()

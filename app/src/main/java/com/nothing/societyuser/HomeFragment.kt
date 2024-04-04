@@ -96,6 +96,9 @@ class HomeFragment : Fragment() {
                         intentFun(MeetingMain::class.java)
 
                     }
+                    3->{
+                        Toast.makeText(requireContext(), "tmp not available", Toast.LENGTH_SHORT).show()
+                    }
                     4->{
                         intentFun(WalletActivity::class.java)
                     }

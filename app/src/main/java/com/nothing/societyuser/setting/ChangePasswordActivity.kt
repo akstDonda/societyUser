@@ -28,6 +28,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Change Password"
 
         auth = FirebaseAuth.getInstance()
         binding.btnChangePassword.setOnClickListener {

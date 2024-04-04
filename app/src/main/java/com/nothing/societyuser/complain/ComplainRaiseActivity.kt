@@ -40,7 +40,7 @@ class ComplainRaiseActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error: ${ImagePicker.getError(data)}", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Image empty, try again", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -176,11 +176,11 @@ class ComplainRaiseActivity : AppCompatActivity() {
                                 if (document != null) {
                                     // Access the fields you need
                                     val societyName = document.getString("name")
-                                    Toast.makeText(
-                                        this,
-                                        "Society Name: $societyName",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+//                                    Toast.makeText(
+//                                        this,
+//                                        "Society Name: $societyName",
+//                                        Toast.LENGTH_SHORT
+//                                    ).show()
 
                                     // Update the UI on the main thread
                                     runOnUiThread {

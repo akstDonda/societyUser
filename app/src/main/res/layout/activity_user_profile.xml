@@ -107,7 +107,7 @@
                     android:id="@+id/btn_update_profile_next"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary_color"
+                    android:background="@drawable/buttton_round"
                     android:text="UPDATE PROFILE"
                     android:layout_margin="@dimen/_20sdp"/>
 

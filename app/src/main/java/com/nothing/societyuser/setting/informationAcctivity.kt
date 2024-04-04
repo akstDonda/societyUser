@@ -8,5 +8,6 @@ class informationAcctivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_information_acctivity)
+        supportActionBar?.title = "❕ Information"
     }
 }

@@ -28,19 +28,18 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 >
                 <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_gravity="center_vertical"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/_10sdp"
                     app:cardCornerRadius="@dimen/_25sdp">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/user_image_homefragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="User Profile"
                         android:backgroundTint="@android:color/transparent"
-                        android:layout_margin="@dimen/_3sdp"
                         tools:ignore="HardcodedText" />
                 </androidx.cardview.widget.CardView>
 

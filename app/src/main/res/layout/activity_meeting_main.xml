@@ -31,37 +31,30 @@
         android:paddingStart="@dimen/_14sdp"
         android:paddingEnd="@dimen/_14sdp"
         >
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
+            android:id="@+id/meeting_id_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Meeting Id"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/material_dynamic_primary80"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:hint="Meeting Id"
             android:inputType="number"
             android:maxLength="10"
             android:textSize="18sp"
-            android:id="@+id/meeting_id_input"/>
+            android:padding="@dimen/_10sdp"
+            tools:ignore="HardcodedText" />
 
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
+            android:id="@+id/meeting_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_background"
             android:hint="Your Name"
-            android:backgroundTint="@color/material_dynamic_primary80"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:id="@+id/meeting_name_input"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:maxLength="10"
+            android:textSize="18sp"
+            android:padding="@dimen/_10sdp"
+            tools:ignore="HardcodedText" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/join_btn"

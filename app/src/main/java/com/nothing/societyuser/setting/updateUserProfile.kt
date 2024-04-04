@@ -172,7 +172,7 @@ class updateUserProfile : AppCompatActivity() {
 
                         // Update the UI on the main thread
                         runOnUiThread {
-                                Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Profile Update", Toast.LENGTH_SHORT).show()
 //                                binding.profileSocNameTxt.text = societyId
 
 //                                Toast.makeText(this,societyId.toString(),Toast.LENGTH_SHORT).show()

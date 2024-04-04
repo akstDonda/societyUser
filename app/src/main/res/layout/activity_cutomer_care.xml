@@ -77,18 +77,19 @@
         android:id="@+id/btn_issue_send_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_color"
         android:layout_marginStart="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_40sdp"
+        android:background="@drawable/buttton_round"
         android:drawableLeft="@drawable/baseline_mark_email_read_24"
         android:text="SEND "
-        android:textSize="@dimen/_20sdp"/>
+        android:textSize="@dimen/_20sdp" />
 
     <Button
         android:id="@+id/btn_issue_call"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_color"
+        android:background="@drawable/buttton_round"
+        android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_40sdp"
         android:layout_marginEnd="@dimen/_40sdp"
         android:drawableLeft="@drawable/baseline_call_24"

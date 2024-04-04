@@ -3,5 +3,9 @@
     <style name="Base.Theme.SocietyUser" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <!-- Set status bar color -->
+        <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="colorAccent">@color/primary_color</item>
     </style>
 </resources>

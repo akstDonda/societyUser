@@ -42,7 +42,7 @@ class ComplainFragment : Fragment() {
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Toast.makeText(requireContext(), "Error: ${ImagePicker.getError(data)}", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Task Cancelled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Image empty, try again", Toast.LENGTH_SHORT).show()
             }
         }
 

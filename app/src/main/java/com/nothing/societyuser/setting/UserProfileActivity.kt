@@ -17,6 +17,7 @@ class UserProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "User Profile"
         UserDataFetch()
 
         binding.btnUpdateProfileNext.setOnClickListener {

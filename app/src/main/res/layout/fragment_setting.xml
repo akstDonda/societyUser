@@ -142,6 +142,7 @@
             <!--        notification-->
 
             <LinearLayout
+                android:id="@+id/notification"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
@@ -153,7 +154,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_60sdp"
                     android:padding="@dimen/_8sdp"
-                    android:src="@drawable/baseline_customer_care_24"
+                    android:src="@drawable/baseline_notifications_none_24"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
