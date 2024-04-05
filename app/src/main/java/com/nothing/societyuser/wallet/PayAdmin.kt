@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.Model.payTransaction
+import com.nothing.societyuser.animation_transaction_succes
 import com.nothing.societyuser.databinding.ActivityPayAdminBinding
 
 class PayAdmin : AppCompatActivity() {
@@ -28,7 +29,7 @@ class PayAdmin : AppCompatActivity() {
         binding.payAdminBtn.setOnClickListener {
             if (!transactionProcessed) {
                 fetchCurrentAmount(transactionAmountDouble)
-                val intent = Intent(this, WalletActivity::class.java)
+                val intent = Intent(this, animation_transaction_succes::class.java)
                 startActivity(intent)
             } else {
                 Toast.makeText(this, "Transaction already processed", Toast.LENGTH_SHORT).show()

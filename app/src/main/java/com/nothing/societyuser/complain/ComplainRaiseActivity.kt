@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.nothing.societyuser.Complain_success
 import com.nothing.societyuser.Model.complainModel
 import com.nothing.societyuser.R
 import com.nothing.societyuser.databinding.ActivityComplainRaiseBinding
@@ -134,10 +135,12 @@ class ComplainRaiseActivity : AppCompatActivity() {
 
         complainModel.upload(this)
         toastFun("Complaint submitted successfully.")
+        intentFun(Complain_success::class.java)
 
         binding.editTextComplainTitle.text.clear()
         binding.editTextIssueDescription.text.clear()
         binding.complainSelectSpinnerBtn.selectItemByIndex(0)
+        finish()
 
     }
 

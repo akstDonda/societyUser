@@ -17,6 +17,7 @@ import com.codebyashish.autoimageslider.Models.ImageSlidesModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.Model.HomeCategoryModel
+import com.nothing.societyuser.chat.ChatMainActivity
 import com.nothing.societyuser.complain.ComplainRaiseActivity
 import com.nothing.societyuser.databinding.FragmentHomeBinding
 import com.nothing.societyuser.meeting.MeetingMain
@@ -97,7 +98,7 @@ class HomeFragment : Fragment() {
 
                     }
                     3->{
-                        Toast.makeText(requireContext(), "tmp not available", Toast.LENGTH_SHORT).show()
+                        intentFun(ChatMainActivity::class.java)
                     }
                     4->{
                         intentFun(WalletActivity::class.java)

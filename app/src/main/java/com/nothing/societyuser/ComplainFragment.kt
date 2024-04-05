@@ -137,6 +137,7 @@ class ComplainFragment : Fragment() {
         complainModel.societyName = societyNameSend.toString()
         complainModel.upload(requireContext())
         toastFun("Complaint submitted successfully.")
+        intentFun(Complain_success::class.java)
 
         binding.editTextComplainTitle.text.clear()
         binding.editTextIssueDescription.text.clear()

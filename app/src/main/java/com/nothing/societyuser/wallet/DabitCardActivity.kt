@@ -1,5 +1,6 @@
 package com.nothing.societyuser.wallet
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -8,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.societyuser.R
+import com.nothing.societyuser.addMoneyAnimation
+import com.nothing.societyuser.databinding.ActivityDabitCardBinding
 import java.util.Calendar
 
 class DabitCardActivity : AppCompatActivity() {
@@ -15,10 +18,13 @@ class DabitCardActivity : AppCompatActivity() {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var binding: ActivityDabitCardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dabit_card)
+        binding = ActivityDabitCardBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        supportActionBar?.title = "DebitCard Transaction"
 
         // TODO: Add increase money in user wallet
         val addAmount = intent.getStringExtra("amount")
@@ -27,7 +33,14 @@ class DabitCardActivity : AppCompatActivity() {
         val btn:Button = findViewById(R.id.add_money_wallet_debitCard)
         btn.setOnClickListener(){
 
-            updateCurrentAmount(intAddAmount)
+            if (binding.cardNumberEdittext.text.toString() == "111122223333" ||binding.cvvEdittext.text.toString() == "123" ){
+                updateCurrentAmount(intAddAmount)
+            }else{
+                binding.cardNumberEdittext.error = "Invalid Card Number"
+                binding.cvvEdittext.error = "Invalid CVV"
+                binding.expiryDateEdittext.error = "Invalid Expiry Date"
+            }
+
         }
 
     }
@@ -49,6 +62,8 @@ class DabitCardActivity : AppCompatActivity() {
                         memberDocRef.update("currentAmount", newAmount)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Amount Added", Toast.LENGTH_SHORT).show()
+                                var intent = Intent(this@DabitCardActivity,addMoneyAnimation::class.java);
+                                startActivity(intent)
                                 finish() // Close the activity if the update is successful
                             }
                             .addOnFailureListener { e ->

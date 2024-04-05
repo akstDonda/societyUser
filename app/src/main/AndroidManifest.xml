@@ -21,6 +21,30 @@
         android:theme="@style/Theme.SocietyUser"
         tools:targetApi="31">
         <activity
+            android:name=".animation_transaction_succes"
+            android:exported="false" />
+        <activity
+            android:name=".addMoneyAnimation"
+            android:exported="false" />
+        <activity
+            android:name=".Complain_success"
+            android:exported="false" />
+        <activity
+            android:name=".webView_info2"
+            android:exported="false" />
+        <activity
+            android:name=".webView_info"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ConversationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login_mock"
+            android:exported="false" />
+        <activity
+            android:name=".chat.ChatMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".welcome.EventActivity"
             android:exported="false" />
         <activity
@@ -91,7 +115,9 @@
             android:exported="false" />
         <activity
             android:name=".wallet.DabitCardActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".wallet.WalletActivity"
+            android:theme="@style/Theme.SocietyUser.title" />
         <activity
             android:name=".wallet.PayAdmin"
             android:exported="false" />
