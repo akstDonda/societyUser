@@ -1,28 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/white">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/complain_animation"
-        android:layout_width="618dp"
-        android:layout_height="447dp"
-        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         android:padding="@dimen/_30sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center_horizontal"
+
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
         app:lottie_rawRes="@raw/sucess_lottie" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/complain_animation_second"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:padding="@dimen/_30sdp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/cancel_lottie" />
 
     <Button
         android:id="@+id/transaction_amount"
         android:layout_width="match_parent"
+        android:layout_weight="0.04"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_25sdp"
         android:layout_marginTop="88dp"
@@ -37,6 +49,7 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
+        android:layout_weight="0.04"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
@@ -53,11 +66,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_4sdp"
+        android:layout_weight="0.02"
         android:gravity="center"
         android:text="(secure Transaction)"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

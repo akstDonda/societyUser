@@ -29,8 +29,7 @@ class PayAdmin : AppCompatActivity() {
         binding.payAdminBtn.setOnClickListener {
             if (!transactionProcessed) {
                 fetchCurrentAmount(transactionAmountDouble)
-                val intent = Intent(this, animation_transaction_succes::class.java)
-                startActivity(intent)
+
             } else {
                 Toast.makeText(this, "Transaction already processed", Toast.LENGTH_SHORT).show()
             }
@@ -68,6 +67,9 @@ class PayAdmin : AppCompatActivity() {
                                         "Transaction successful. Updated current amount in Firestore.",
                                         Toast.LENGTH_SHORT
                                     ).show()
+                                    val intent = Intent(this, animation_transaction_succes::class.java)
+                                    intent.putExtra("key","success")
+                                    startActivity(intent)
                                     handleCurrentAmount(currentAmount) // Handle the currentAmount value
                                     transactionProcessed = true // Set the flag to true after processing the transaction
 
@@ -96,6 +98,9 @@ class PayAdmin : AppCompatActivity() {
                                 }
                         } else {
                             Toast.makeText(this@PayAdmin, "Insufficient balance", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, animation_transaction_succes::class.java)
+                            intent.putExtra("key","unsuccess")
+                            startActivity(intent)
                         }
                     } else {
                         Toast.makeText(this@PayAdmin, "Document does not exist", Toast.LENGTH_SHORT).show()
