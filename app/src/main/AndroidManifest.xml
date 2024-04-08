@@ -39,7 +39,7 @@
             android:name=".chat.ConversationActivity"
             android:exported="false" />
         <activity
-            android:name=".login_mock"
+            android:name=".chat.login_mock"
             android:exported="false" />
         <activity
             android:name=".chat.ChatMainActivity"

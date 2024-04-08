@@ -15,18 +15,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:cardCornerRadius="@dimen/_10sdp">
-        <EditText
-            android:id="@+id/edt_issue_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary_color"
-            android:textColor="@color/white"
-            android:hint="Email"
-            android:padding="@dimen/_10sdp"
-            android:inputType="text"
-            android:textColorHint="@color/white"
-            android:gravity="top|start"
-            />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

@@ -20,7 +20,7 @@ class cutomer_care : AppCompatActivity() {
         binding.btnIssueSendEmail.setOnClickListener(){
             var content = binding.edtIssueDesc.text.toString()
             var title = binding.edtIssueTitle.text.toString()
-            var email = "akshitdonda117@gmail.com"
+            var email = "livinglink01@gmail.com"
 
             if (title.isEmpty()  && email.isEmpty() && content.isEmpty()){
                 Toast.makeText(this,"Please fill all the fields",Toast.LENGTH_SHORT).show()

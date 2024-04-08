@@ -32,8 +32,18 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         binding.btnChangePassword.setOnClickListener {
-            changePassword()
-            finish()
+
+            if (binding.edtCurrentPassword.text.toString().isEmpty() || binding.edtNewPassword.text.toString().isEmpty() || binding.edtConformPassword.text.toString().isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else if (binding.edtNewPassword.text.toString() !=  binding.edtConformPassword.text.toString()) {
+                Toast.makeText(this, "New password and confirm password do not match", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.i("TAG","ok")
+                changePassword()
+                finish()
+            }
+
+
         }
 
 
@@ -141,7 +151,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                                         }
                                     }
                             }else{
-                                Toast.makeText(this, "Password change failed", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Password change failed(Something Wrong)", Toast.LENGTH_SHORT).show()
                             }
                         }
 

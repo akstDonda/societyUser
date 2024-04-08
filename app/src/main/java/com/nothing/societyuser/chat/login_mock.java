@@ -1,4 +1,4 @@
-package com.nothing.societyuser;
+package com.nothing.societyuser.chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,14 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.nothing.societyuser.chat.ConversationActivity;
+import com.nothing.societyuser.R;
 import com.zegocloud.zimkit.services.ZIMKit;
 
 import im.zego.zim.enums.ZIMErrorCode;
@@ -32,19 +31,6 @@ public class login_mock extends AppCompatActivity {
         setContentView(R.layout.activity_login_mock);
         userDataFetch();
 
-//        userIdInput = findViewById(R.id.userid_input);
-//        loginButton = findViewById(R.id.loginBtn);
-
-        //Toast.makeText(login_mock.this, "Document data: "  + " " + userName + " " + uid, Toast.LENGTH_SHORT).show();
-        // Update the UI on the main thread
-
-//        loginButton.setOnClickListener(v -> {
-//            String userId = userIdInput.getText().toString();
-//
-//            connectUser(userId,userId,"");
-//            //firebase data
-//
-//        });
     }
 
     public void connectUser(String userId, String userName,String userAvatar) {

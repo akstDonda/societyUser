@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.nothing.societyuser.R
-import com.nothing.societyuser.login_mock
 import com.zegocloud.zimkit.services.ZIMKit
 
 class ChatMainActivity : AppCompatActivity() {

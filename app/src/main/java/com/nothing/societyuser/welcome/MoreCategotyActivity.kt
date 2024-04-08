@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.nothing.societyuser.Model.HomeCategoryModel
 import com.nothing.societyuser.R
+import com.nothing.societyuser.chat.ChatMainActivity
 import com.nothing.societyuser.complain.ComplainRaiseActivity
 import com.nothing.societyuser.complain.ComplainRaiseHistory
 import com.nothing.societyuser.databinding.ActivityMoreCategotyBinding
@@ -47,7 +48,7 @@ class MoreCategotyActivity : AppCompatActivity() {
         dummyDataList.add(HomeCategoryModel(R.drawable.baseline_meeting_24, "Meeting"))
         dummyDataList.add(HomeCategoryModel(R.drawable.baseline_chat_24, "Chat"))
         dummyDataList.add(HomeCategoryModel(R.drawable.baseline_event_note_24,"Notes"))
-        dummyDataList.add(HomeCategoryModel(R.drawable.baseline_event_note_24, "Event"))
+        dummyDataList.add(HomeCategoryModel(R.drawable.event, "Event"))
         dummyDataList.add(HomeCategoryModel(R.drawable.wallet_vector, "Wallet"))
         dummyDataList.add(HomeCategoryModel(R.drawable.ic_home_black_24dp, "Home"))
         dummyDataList.add(HomeCategoryModel(R.drawable.pay_history_vector, "Pay History"))
@@ -82,7 +83,7 @@ class MoreCategotyActivity : AppCompatActivity() {
                         intentFun(MeetingMain::class.java)
                     }
                     3->{
-                        Toast.makeText(this@MoreCategotyActivity, "tmp not available", Toast.LENGTH_SHORT).show()
+                        intentFun(ChatMainActivity::class.java)
                     }
                     4->{
                         intentFun(NotesMainActivity::class.java)

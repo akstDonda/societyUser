@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.nothing.societyuser.R;
-import com.nothing.societyuser.login_mock;
 import com.zegocloud.zimkit.common.ZIMKitRouter;
 import com.zegocloud.zimkit.common.enums.ZIMKitConversationType;
 
